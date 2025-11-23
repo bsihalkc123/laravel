@@ -10,6 +10,12 @@
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
 
   <div class="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md">
+
+    <!-- College Logo -->
+    <div class="flex justify-center mb-4">
+      <img src="{{ asset('college logo.png') }}" alt="College Logo" class="w-[200px] h-[200px] object-contain">
+    </div>
+
     <h2 class="text-3xl font-bold text-center mb-6 text-gray-800">Login</h2>
 
     @if ($errors->any())
@@ -20,11 +26,11 @@
         @endforeach
       </ul>
     </div>
-    
     @endif
 
     <form action="{{ route('login.submit') }}" method="post">
       @csrf
+
       <!-- Email -->
       <div class="mb-4">
         <label class="block text-gray-600 font-medium mb-1">Email</label>
