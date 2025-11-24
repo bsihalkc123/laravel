@@ -92,14 +92,14 @@
                     <i class="fas fa-tachometer-alt w-5 mr-3"></i>
                     <span>Dashboard</span>
                 </a>
-                
+
                 <a href="{{ route('students.index') }}" class="sidebar-item flex items-center py-3 px-6 text-gray-700">
                     <i class="fas fa-user-graduate w-5 mr-3"></i>
                     <span>Students</span>
                     <span class="ml-auto bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">42</span>
                 </a>
                 
-                <a href="#" class="sidebar-item flex items-center py-3 px-6 text-gray-700">
+                <a href="{{ route('teachers.index') }}" class="sidebar-item flex items-center py-3 px-6 text-gray-700">
                     <i class="fas fa-chalkboard-teacher w-5 mr-3"></i>
                     <span>Teachers</span>
                     <span class="ml-auto bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">12</span>
