@@ -19,13 +19,13 @@
     <h2 class="text-3xl font-bold text-center mb-6 text-gray-800">Login</h2>
 
     @if ($errors->any())
-    <div class="bg-red-100 text-red-700 p-3 rounded md-4">
-      <ul class="list-disc pl-5">
-        @foreach ($errors->all() as $error )
-        <li>{{ $error }}</li>
-        @endforeach
-      </ul>
-    </div>
+      <div class="bg-red-100 text-red-700 p-3 rounded md-4 mb-4">
+        <ul class="list-disc pl-5">
+          @foreach ($errors->all() as $error )
+            <li>{{ $error }}</li>
+          @endforeach
+        </ul>
+      </div>
     @endif
 
     <form action="{{ route('login.submit') }}" method="post">
@@ -52,11 +52,11 @@
       </button>
     </form>
 
-    <!-- Footer Links -->
     <p class="text-center text-gray-600 text-sm mt-6">
       Don't have an account? 
       <a href="#" class="text-blue-600 hover:underline">Sign Up</a>
     </p>
+
   </div>
 
 </body>
