@@ -38,13 +38,13 @@
     </div>
 
     <div>
-        <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
-        <input type="text" name="phone" id="phone" value="{{ $student->phone }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+        <label for="phone_number" class="block text-sm font-medium text-gray-700">Phone Number</label>
+        <input type="text" name="phone_number" id="phone_number" value="{{ $student->phone_number }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
     </div>
 
     <div>
-        <label for="dob" class="block text-sm font-medium text-gray-700">Date of Birth</label>
-        <input type="date" name="dob" id="dob" value="{{ $student->dob }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+        <label for="date_of_birth" class="block text-sm font-medium text-gray-700">Date of Birth</label>
+        <input type="date" name="date_of_birth" id="date_of_birth" value="{{ $student->date_of_birth }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
     </div>
 
     <div>
@@ -73,6 +73,10 @@
             <option value="2nd" {{ $student->semester == '2nd' ? 'selected' : '' }}>2nd</option>
             <option value="3rd" {{ $student->semester == '3rd' ? 'selected' : '' }}>3rd</option>
             <option value="4th" {{ $student->semester == '4th' ? 'selected' : '' }}>4th</option>
+            <option value="5th" {{ $student->semester == '5th' ? 'selected' : '' }}>5th</option>
+            <option value="6th" {{ $student->semester == '6th' ? 'selected' : '' }}>6th</option>        
+            <option value="7th" {{ $student->semester == '7th' ? 'selected' : '' }}>7th</option>
+            <option value="8th" {{ $student->semester == '8th' ? 'selected' : '' }}>8th</option>
         </select>
     </div>
 

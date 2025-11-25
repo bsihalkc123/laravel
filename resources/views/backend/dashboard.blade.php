@@ -70,7 +70,7 @@
                     <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
                         <i class="fas fa-graduation-cap text-white"></i>
                     </div>
-                    <h1 class="text-xl font-bold text-gray-800 ml-3">EduManage</h1>
+                    <h1 class="text-xl font-bold text-gray-800 ml-3">Asian College Of Higher Studies</h1>
                 </div>
                 <p class="text-sm text-gray-500 mt-2">Student Management System</p>
             </div>
@@ -81,7 +81,7 @@
                     <i class="fas fa-user text-blue-600"></i>
                 </div>
                 <div class="ml-3">
-                    <h3 class="font-medium text-gray-800">John Smith</h3>
+                    <h3 class="font-medium text-gray-800">Bishal Kc</h3>
                     <p class="text-xs text-gray-500">Administrator</p>
                 </div>
             </div>
@@ -105,25 +105,30 @@
                     <span class="ml-auto bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">12</span>
                 </a>
                 
-                <a href="#" class="sidebar-item flex items-center py-3 px-6 text-gray-700">
+                <a href="{{ route('courses.index') }}" class="sidebar-item flex items-center py-3 px-6 text-gray-700">
                     <i class="fas fa-book w-5 mr-3"></i>
                     <span>Courses</span>
                 </a>
                 
-                <a href="#" class="sidebar-item flex items-center py-3 px-6 text-gray-700">
+                <a href="{{ route('subjects.index') }}" class="sidebar-item flex items-center py-3 px-6 text-gray-700">
                     <i class="fas fa-calendar-alt w-5 mr-3"></i>
-                    <span>Schedule</span>
+                    <span>Subjects</span>
                 </a>
                 
-                <a href="#" class="sidebar-item flex items-center py-3 px-6 text-gray-700">
+                <a href="{{ route('exams.index') }}" class="sidebar-item flex items-center py-3 px-6 text-gray-700">
                     <i class="fas fa-file-invoice-dollar w-5 mr-3"></i>
-                    <span>Finance</span>
+                    <span>Exams</span>
                 </a>
                 
-                <a href="#" class="sidebar-item flex items-center py-3 px-6 text-gray-700">
+                <a href="{{ route('results.index') }}" class="sidebar-item flex items-center py-3 px-6 text-gray-700">
                     <i class="fas fa-chart-bar w-5 mr-3"></i>
-                    <span>Reports</span>
+                    <span>Results</span>
                 </a>
+
+                {{-- <a href="{{ route('enrollments.index') }}" class="sidebar-item flex items-center py-3 px-6 text-gray-700">
+                    <i class="fas fa-chart-bar w-5 mr-3"></i>
+                    <span>Enrollments</span>
+                </a> --}}
                 
                 <a href="#" class="sidebar-item flex items-center py-3 px-6 text-gray-700">
                     <i class="fas fa-cog w-5 mr-3"></i>
@@ -167,5 +172,5 @@
                         <span class="ml-2 text-gray-700 font-medium">John</span>
                     </div>
                 </div>
-            </hea --}}
-            {{-- resources/views/backend/dashboard.blade.php
+            </header>
+            

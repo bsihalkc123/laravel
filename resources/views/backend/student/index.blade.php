@@ -3,11 +3,17 @@
 <h2 class="text-2xl font-semibold mb-6">Students List</h2>
 <!-- Top Controls: Search + Add New -->
 <div class="flex justify-between items-center mb-4">
+    @if(session('success'))
+<div class="bg-green-100 text-green-700 p-3 rounded mb-3">
+    {{ session('success') }}
+</div>
+@endif
     <!-- Search Form -->
     <form action="{{ route('students.index') }}" method="GET" class="flex space-x-2">
         <input type="text" name="search" value="{{ request('search') }}" placeholder="Search students..." class="border border-gray-300 rounded-md p-2">
         <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Search</button>
     </form>
+
 <div class="flex justify-between items-center mb-4">
     <h2 class="text-2xl font-semibold">Students List</h2>
     <a href="{{ route('students.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
@@ -27,7 +33,7 @@
             <th class="p-2 border">Date of Birth</th>
             <th class="p-2 border">Course</th>
             <th class="p-2 border">Enrollment Date</th>
-            <th class="p-2 border">Phone</th>
+            <th class="p-2 border">Phone Number</th>
             <th class="p-2 border">Semester</th>
         </tr>
     </thead>
@@ -41,10 +47,10 @@
             <td class="p-2 border">{{ $student->last_name }}</td>
             <td class="p-2 border">{{ $student->email }}</td>
             <td class="p-2 border">{{ $student->address }}</td>
-            <td class="p-2 border">{{ $student->dob }}</td>
+            <td class="p-2 border">{{ $student->date_of_birth }}</td>
             <td class="p-2 border">{{ $student->course }}</td>
             <td class="p-2 border">{{ $student->enrollment_date }}</td>    
-            <td class="p-2 border">{{ $student->phone }}</td>
+            <td class="p-2 border">{{ $student->phone_number }}</td>
             <td class="p-2 border">{{ $student->semester }}</td>
         </tr>
         @endforeach

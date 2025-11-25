@@ -14,8 +14,8 @@ class Student extends Model
         'last_name',
         'student_code',
         'email',
-        'phone',
-        'dob',
+        'phone_number',
+        'date_of_birth',
         'address',
         'course',          // 
         'enrollment_date',

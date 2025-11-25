@@ -5,6 +5,11 @@
 @section('content')
 <div class="p-6 bg-white rounded-lg shadow-md mt-6">
     <h2 class="text-2xl font-semibold mb-4">Teachers</h2>
+    @if(session('success'))
+<div class="bg-green-100 text-green-700 p-3 rounded mb-3">
+    {{ session('success') }}
+</div>
+@endif
 
     <!-- Add New Teacher Button -->
     <div class="mb-4">
