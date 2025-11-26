@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Subject;
 use App\Models\Exam;
+use App\Models\Student;
+use App\Models\Enrollment;
 
 class Course extends Model
 {
@@ -28,5 +30,9 @@ public function exams()
 {
     return $this->hasMany(Exam::class);
 }
+public function enrollments()
+{
+    return $this->hasMany(Enrollment::class);
 
+}
 }

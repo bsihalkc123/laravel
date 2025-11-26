@@ -9,6 +9,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ResultController;
+use App\Http\Controllers\EnrollmentController;
 
 // Redirect home to login
 Route::redirect('/', '/login');
@@ -25,20 +26,13 @@ Route::middleware('auth')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // -----------------------------
-    // Backend resources (prefixed)
-    // -----------------------------
-    Route::prefix('backend')->name('backend.')->group(function () {
-        Route::resource('students', StudentController::class);
-        Route::resource('teachers', TeacherController::class);
-        Route::resource('courses', CourseController::class);
-        Route::resource('subjects', SubjectController::class);
-        Route::resource('exams', ExamController::class);
-    });
-
-    // -----------------------------
-    // Results (no prefix)
-    // -----------------------------
+    // Resource routes (no backend prefix)
+    Route::resource('students', StudentController::class);
+    Route::resource('teachers', TeacherController::class);
+    Route::resource('courses', CourseController::class);
+    Route::resource('subjects', SubjectController::class);
+    Route::resource('exams', ExamController::class);
+    Route::resource('enrollments', EnrollmentController::class);
     Route::resource('results', ResultController::class);
 
     // Logout

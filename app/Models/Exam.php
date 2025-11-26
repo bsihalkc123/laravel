@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Course;
+use App\Models\Result;
+use App\Models\Student;
 
 class Exam extends Model
 {
@@ -20,6 +22,10 @@ class Exam extends Model
     public function course()
     {
         return $this->belongsTo(Course::class);
+    }
+      public function results()
+    {
+        return $this->hasMany(Result::class);
     }
 }
 

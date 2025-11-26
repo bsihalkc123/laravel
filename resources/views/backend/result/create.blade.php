@@ -62,7 +62,10 @@
             <textarea name="remarks" class="w-full border px-3 py-2 rounded"></textarea>
         </div>
 
-        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Result</button>
+        <div class="flex space-x-4">
+            <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">Save Result</button>
+            <a href="{{ route('results.index') }}" class="px-6 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Cancel</a>
+        </div>
     </form>
 </div>
 @endsection

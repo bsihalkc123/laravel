@@ -1,72 +1,130 @@
 @extends('backend.master')
 @section('content')
-<h2 class="text-2xl font-semibold mb-6">Students List</h2>
-<!-- Top Controls: Search + Add New -->
-<div class="flex justify-between items-center mb-4">
+
+<div class="p-8">
+
+    <!-- Page Title -->
+    <h2 class="text-3xl font-bold text-gray-800 mb-6">Students List</h2>
+
+    <!-- Success Message -->
     @if(session('success'))
-<div class="bg-green-100 text-green-700 p-3 rounded mb-3">
-    {{ session('success') }}
+        <div class="bg-green-100 text-green-700 p-3 rounded mb-5 border border-green-300 shadow-sm">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <!-- Top Controls -->
+    <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+
+        <!-- Search Form -->
+        <form action="{{ route('students.index') }}" method="GET" class="flex items-center space-x-2 w-full md:w-auto">
+            <input
+                type="text"
+                name="search"
+                value="{{ request('search') }}"
+                placeholder="Search students..."
+                class="border border-gray-300 rounded-lg p-2 w-full md:w-64 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            >
+            <button
+                type="submit"
+                class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition shadow"
+            >
+                Search
+            </button>
+        </form>
+
+        <!-- Add New Button -->
+        <a
+            href="{{ route('students.create') }}"
+            class="bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition shadow"
+        >
+            + Add New Student
+        </a>
+    </div>
+
+    <!-- Table Container -->
+    <div class="overflow-hidden rounded-xl shadow-lg border border-gray-200">
+
+        <table class="min-w-full border-collapse">
+
+            <!-- Table Header -->
+            <thead class="bg-gradient-to-r from-blue-600 to-blue-500 text-white">
+                <tr>
+                    <th class="py-4 px-4 text-left font-semibold">S.N.</th>
+                    <th class="py-4 px-4 text-left font-semibold">Student Code</th>
+                    <th class="py-4 px-4 text-left font-semibold">First Name</th>
+                    <th class="py-4 px-4 text-left font-semibold">Last Name</th>
+                    <th class="py-4 px-4 text-left font-semibold">Email</th>
+                    <th class="py-4 px-4 text-left font-semibold">Address</th>
+                    <th class="py-4 px-4 text-left font-semibold">Date of Birth</th>
+                    <th class="py-4 px-4 text-left font-semibold">Course</th>
+                    <th class="py-4 px-4 text-left font-semibold">Enrollment Date</th>
+                    <th class="py-4 px-4 text-left font-semibold">Phone Number</th>
+                    <th class="py-4 px-4 text-left font-semibold">Semester</th>
+                    <th class="py-4 px-4 text-left font-semibold">Actions</th>
+                </tr>
+            </thead>
+
+            <!-- Table Body -->
+            <tbody class="bg-white">
+                @foreach ($students as $student)
+                <tr class="border-b hover:bg-blue-50 transition duration-200">
+                    <td class="py-3 px-4">{{ $student->id }}</td>
+                    <td class="py-3 px-4 font-medium">{{ $student->student_code }}</td>
+                    <td class="py-3 px-4">{{ $student->first_name }}</td>
+                    <td class="py-3 px-4">{{ $student->last_name }}</td>
+                    <td class="py-3 px-4">{{ $student->email }}</td>
+                    <td class="py-3 px-4">{{ $student->address }}</td>
+                    <td class="py-3 px-4">{{ $student->date_of_birth }}</td>
+                    <td class="py-3 px-4">{{ $student->course }}</td>
+                    <td class="py-3 px-4">{{ $student->enrollment_date }}</td>
+                    <td class="py-3 px-4">{{ $student->phone_number }}</td>
+                    <td class="py-3 px-4">{{ $student->semester }}</td>
+
+                    <!-- Action Buttons -->
+                    <td class="py-3 px-4 flex gap-2">
+                        <a
+                            href="{{ route('students.edit', $student->id) }}"
+                            class="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 shadow transition flex items-center gap-1"
+                        >
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+
+                        <form
+                            action="{{ route('students.destroy', $student->id) }}"
+                            method="POST"
+                            onsubmit="return confirm('Are you sure you want to delete this student?')"
+                        >
+                            @csrf
+                            @method('DELETE')
+                            <button
+                                class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 shadow transition flex items-center gap-1"
+                            >
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+
+            <!-- Table Footer -->
+            <tfoot class="bg-gray-100">
+                <tr>
+                    <td colspan="12" class="py-4 px-4 font-semibold text-right text-gray-700">
+                        Total: {{ $students->count() }} students
+                    </td>
+                </tr>
+            </tfoot>
+
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="mt-6">
+        {{ $students->withQueryString()->links() }}
+    </div>
+
 </div>
-@endif
-    <!-- Search Form -->
-    <form action="{{ route('students.index') }}" method="GET" class="flex space-x-2">
-        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search students..." class="border border-gray-300 rounded-md p-2">
-        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Search</button>
-    </form>
 
-<div class="flex justify-between items-center mb-4">
-    <h2 class="text-2xl font-semibold">Students List</h2>
-    <a href="{{ route('students.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
-        Add New Student
-    </a>
-</div>
-
-<table class="min-w-full border border-gray-300">
-    <thead class="bg-gray-100">
-        <tr>
-            <th class="p-2 border">S.N.</th>
-            <th class="p-2 border">Student Code</th>
-            <th class="p-2 border">First Name</th>
-            <th class="p-2 border">Last Name</th>
-            <th class="p-2 border">Email</th>
-            <th class="p-2 border">Address</th>
-            <th class="p-2 border">Date of Birth</th>
-            <th class="p-2 border">Course</th>
-            <th class="p-2 border">Enrollment Date</th>
-            <th class="p-2 border">Phone Number</th>
-            <th class="p-2 border">Semester</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        @foreach ($students as $student)
-        <tr class="hover:bg-gray-50">
-            <td class="p-2 border">{{ $student->id }}</td>
-            <td class="p-2 border">{{ $student->student_code }}</td>
-            <td class="p-2 border">{{ $student->first_name }}</td>
-            <td class="p-2 border">{{ $student->last_name }}</td>
-            <td class="p-2 border">{{ $student->email }}</td>
-            <td class="p-2 border">{{ $student->address }}</td>
-            <td class="p-2 border">{{ $student->date_of_birth }}</td>
-            <td class="p-2 border">{{ $student->course }}</td>
-            <td class="p-2 border">{{ $student->enrollment_date }}</td>    
-            <td class="p-2 border">{{ $student->phone_number }}</td>
-            <td class="p-2 border">{{ $student->semester }}</td>
-        </tr>
-        @endforeach
-    </tbody>
-
-    <tfoot>
-        <tr>
-            <td colspan="11" class="p-2 border text-right font-semibold">
-                Total: {{ $students->count() }} students
-            </td>
-        </tr>
-    </tfoot>
-</table>
-
-<!-- Pagination -->
-<div class="mt-4">
-    {{ $students->withQueryString()->links() }}
-</div>
 @endsection

@@ -125,10 +125,10 @@
                     <span>Results</span>
                 </a>
 
-                {{-- <a href="{{ route('enrollments.index') }}" class="sidebar-item flex items-center py-3 px-6 text-gray-700">
+                <a href="{{ route('enrollments.index') }}" class="sidebar-item flex items-center py-3 px-6 text-gray-700">
                     <i class="fas fa-chart-bar w-5 mr-3"></i>
                     <span>Enrollments</span>
-                </a> --}}
+                </a>
                 
                 <a href="#" class="sidebar-item flex items-center py-3 px-6 text-gray-700">
                     <i class="fas fa-cog w-5 mr-3"></i>
@@ -167,10 +167,61 @@
                     <!-- User Menu -->
                     <div class="flex items-center">
                         <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-medium">
-                            JS
+                            BK
                         </div>
-                        <span class="ml-2 text-gray-700 font-medium">John</span>
+                        <span class="ml-2 text-gray-700 font-medium">Bishal Kc</span>
                     </div>
                 </div>
             </header>
-            
+<body>
+          <!-- Main Content Body -->
+<div class="p-6 bg-gray-50 min-h-screen">
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-6">
+        <!-- Total Students -->
+        <div class="card stat-card text-white p-6 rounded-lg shadow-lg flex items-center justify-between">
+            <div>
+                <h4 class="text-sm font-medium">Total Students</h4>
+                <p class="text-2xl font-bold mt-2">42</p>
+            </div>
+            <div class="text-4xl opacity-70">
+                <i class="fas fa-user-graduate"></i>
+            </div>
+        </div>
+
+        <!-- Total Teachers -->
+        <div class="card stat-card text-white p-6 rounded-lg shadow-lg flex items-center justify-between" style="background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);">
+            <div>
+                <h4 class="text-sm font-medium">Total Teachers</h4>
+                <p class="text-2xl font-bold mt-2">12</p>
+            </div>
+            <div class="text-4xl opacity-70">
+                <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+        </div>
+
+        <!-- Total Courses -->
+        <div class="card stat-card text-white p-6 rounded-lg shadow-lg flex items-center justify-between" style="background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);">
+            <div>
+                <h4 class="text-sm font-medium">Total Courses</h4>
+                <p class="text-2xl font-bold mt-2">10</p>
+            </div>
+            <div class="text-4xl opacity-70">
+                <i class="fas fa-book"></i>
+            </div>
+        </div>
+
+        <!-- Total Exams -->
+        <div class="card stat-card text-white p-6 rounded-lg shadow-lg flex items-center justify-between" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+            <div>
+                <h4 class="text-sm font-medium">Total Exams</h4>
+                <p class="text-2xl font-bold mt-2">8</p>
+            </div>
+            <div class="text-4xl opacity-70">
+                <i class="fas fa-file-alt"></i>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
