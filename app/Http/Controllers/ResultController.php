@@ -10,11 +10,32 @@ use Illuminate\Http\Request;
 
 class ResultController extends Controller
 {
-    public function index()
-    {
-        $results = Result::with(['student', 'exam', 'subject'])->get();
-        return view('backend.result.index', compact('results'));
+ public function index(Request $request)
+{
+    $search = $request->input('search');
+
+    $query = Result::with(['student', 'exam', 'subject']);
+
+    // Optional search
+    if ($search) {
+        $query->whereHas('student', function($q) use ($search) {
+            $q->where('first_name', 'like', "%{$search}%")
+              ->orWhere('last_name', 'like', "%{$search}%");
+        })
+        ->orWhereHas('exam', function($q) use ($search) {
+            $q->where('exam_name', 'like', "%{$search}%");
+        })
+        ->orWhereHas('subject', function($q) use ($search) {
+            $q->where('subject_name', 'like', "%{$search}%");
+        });
     }
+
+    // Paginate results (10 per page)
+    $results = $query->orderBy('id', 'desc')->paginate(10);
+
+    return view('backend.result.index', compact('results', 'search'));
+}
+
 
     public function create()
     {

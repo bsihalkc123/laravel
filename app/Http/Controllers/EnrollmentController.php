@@ -13,10 +13,14 @@ class EnrollmentController extends Controller
      * Display a listing of enrollments.
      */
     public function index()
-    {
-        $enrollments = Enrollment::with(['student', 'course'])->get();
-        return view('backend.enrollment.index', compact('enrollments'));
-    }
+{
+    // Paginate results instead of get()
+    $enrollments = Enrollment::with(['student', 'course'])
+                    ->orderBy('id', 'desc')
+                    ->paginate(10); // 10 per page
+
+    return view('backend.enrollment.index', compact('enrollments'));
+}
 
     /**
      * Show the form for creating a new enrollment.

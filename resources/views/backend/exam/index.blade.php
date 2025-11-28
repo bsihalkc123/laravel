@@ -2,91 +2,137 @@
 
 @section('content')
 
-<div class="flex justify-between items-center mb-4">
-    <h2 class="text-2xl font-bold">Exams List</h2>
+<div class="p-8">
 
-    <a href="{{ route('exams.create') }}" 
-       class="bg-blue-600 text-white px-4 py-2 rounded">
-        + Add New Exam
-    </a>
-</div>
+    <!-- Page Title -->
+    <h2 class="text-3xl font-bold text-gray-800 mb-6">Exams List</h2>
 
-{{-- Search Form --}}
-<form method="GET" action="{{ route('exams.index') }}" class="mb-4">
-    <div class="flex gap-2">
-        <input type="text" 
-               name="search" 
-               placeholder="Search by exam name or year..."
-               value="{{ request('search') }}"
-               class="border px-3 py-2 rounded w-64">
+    <!-- Success Message -->
+    @if(session('success'))
+        <div class="bg-green-100 text-green-700 p-3 rounded mb-5 border border-green-300 shadow-sm">
+            {{ session('success') }}
+        </div>
+    @endif
 
-        <button class="bg-green-600 text-white px-4 py-2 rounded">
-            Search
-        </button>
+    <!-- Top Controls -->
+    <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+
+        <!-- Search Form -->
+        <form method="GET" action="{{ route('exams.index') }}" 
+              class="flex items-center space-x-2 w-full md:w-auto">
+
+            <input 
+                type="text" 
+                name="search"
+                value="{{ request('search') }}"
+                placeholder="Search by exam name or year..."
+                class="border border-gray-300 rounded-lg p-2 w-full md:w-64 
+                       focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            >
+
+            <button 
+                class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition shadow">
+                Search
+            </button>
+        </form>
+
+        <!-- Add Exam Button -->
+        <a href="{{ route('exams.create') }}"
+           class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition shadow">
+            + Add New Exam
+        </a>
     </div>
-</form>
 
+    <!-- Table Container -->
+    <div class="overflow-hidden rounded-xl shadow-lg border border-gray-200">
 
-{{-- Exams Table --}}
-<table class="min-w-full border border-gray-300">
-    <thead class="bg-gray-100">
-        <tr>
-            <th class="border px-3 py-2">#</th>
-            <th class="border px-3 py-2">Exam Name</th>
-            <th class="border px-3 py-2">Course</th>
-            <th class="border px-3 py-2">Year</th>
-            <th class="border px-3 py-2">Term</th>
-            <th class="border px-3 py-2">Start Date</th>
-            <th class="border px-3 py-2">End Date</th>
-            <th class="border px-3 py-2">Actions</th>
-        </tr>
-    </thead>
+        <table class="min-w-full border-collapse">
 
-    <tbody>
-        @forelse ($exams as $key => $exam)
-        <tr>
-            <td class="border px-3 py-2">{{ $key+1 }}</td>
+            <!-- Table Header -->
+            <thead class="bg-gradient-to-r from-blue-600 to-blue-500 text-white">
+                <tr>
+                    <th class="py-4 px-4 text-left font-semibold">S.N.</th>
+                    <th class="py-4 px-4 text-left font-semibold">Exam Name</th>
+                    <th class="py-4 px-4 text-left font-semibold">Course</th>
+                    <th class="py-4 px-4 text-left font-semibold">Year</th>
+                    <th class="py-4 px-4 text-left font-semibold">Term</th>
+                    <th class="py-4 px-4 text-left font-semibold">Start Date</th>
+                    <th class="py-4 px-4 text-left font-semibold">End Date</th>
+                    <th class="py-4 px-4 text-left font-semibold">Actions</th>
+                </tr>
+            </thead>
 
-            <td class="border px-3 py-2">{{ $exam->exam_name }}</td>
+            <!-- Table Body -->
+            <tbody class="bg-white">
 
-            <td class="border px-3 py-2">{{ $exam->course->course_name ?? 'N/A' }}</td>
+                @forelse ($exams as $index => $exam)
+                <tr class="border-b hover:bg-blue-50 transition duration-200">
 
-            <td class="border px-3 py-2">{{ $exam->exam_year }}</td>
+                    <td class="py-3 px-4 text-gray-700">{{ $index + 1 }}</td>
 
-            <td class="border px-3 py-2">{{ $exam->exam_term }}</td>
+                    <td class="py-3 px-4 font-semibold">{{ $exam->exam_name }}</td>
 
-            <td class="border px-3 py-2">{{ $exam->start_date }}</td>
+                    <td class="py-3 px-4">{{ $exam->course->course_name ?? 'N/A' }}</td>
 
-            <td class="border px-3 py-2">{{ $exam->end_date }}</td>
+                    <td class="py-3 px-4">{{ $exam->exam_year }}</td>
 
-            <td class="p-2 flex gap-2">
+                    <td class="py-3 px-4">{{ $exam->exam_term }}</td>
 
-                <a href="{{ route('exams.edit', $exam->id) }}" 
-                   class="bg-yellow-500 text-white px-3 py-1 rounded">
-                    Edit
-                </a>
+                    <td class="py-3 px-4">{{ $exam->start_date }}</td>
 
-                <form action="{{ route('exams.destroy', $exam->id) }}" method="POST" 
-                      onsubmit="return confirm('Are you sure you want to delete this exam?');">
-                    @csrf 
-                    @method('DELETE')
+                    <td class="py-3 px-4">{{ $exam->end_date }}</td>
 
-                    <button class="bg-red-600 text-white px-3 py-1 rounded">
-                        Delete
-                    </button>
-                </form>
+                    <td class="py-3 px-4 flex gap-2">
+                        
+                        <!-- Edit Button -->
+                        <a href="{{ route('exams.edit', $exam->id) }}"
+                           class="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 shadow transition">
+                            Edit
+                        </a>
 
-            </td>
-        </tr>
+                        <!-- Delete -->
+                        <form 
+                            action="{{ route('exams.destroy', $exam->id) }}" 
+                            method="POST"
+                            onsubmit="return confirm('Are you sure you want to delete this exam?')">
+                            @csrf
+                            @method('DELETE')
 
-        @empty
-        <tr>
-            <td colspan="8" class="text-center py-4 text-gray-500">
-                No exams found.
-            </td>
-        </tr>
-        @endforelse
-    </tbody>
-</table>
+                            <button 
+                                class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 shadow transition">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="8" class="py-6 text-center text-gray-500">
+                        No exams found.
+                    </td>
+                </tr>
+                @endforelse
+
+            </tbody>
+
+            <!-- Table Footer -->
+            <tfoot class="bg-gray-100">
+                <tr>
+                    <td colspan="8" class="py-4 px-4 text-right font-semibold text-gray-600">
+                        Total Exams: {{ $exams->count() }}
+                    </td>
+                </tr>
+            </tfoot>
+
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="mt-6">
+        {{ $exams->withQueryString()->links() }}
+    </div>
+
+</div>
 
 @endsection
