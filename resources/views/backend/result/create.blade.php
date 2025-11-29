@@ -19,7 +19,7 @@
             <label class="block mb-1">Student</label>
             <select name="student_id" class="w-full border px-3 py-2 rounded">
                 @foreach($students as $student)
-                    <option value="{{ $student->id }}">{{ $student->name }}</option>
+                    <option value="{{ $student->id }}">{{ $student->student_code }}</option>
                 @endforeach
             </select>
         </div>

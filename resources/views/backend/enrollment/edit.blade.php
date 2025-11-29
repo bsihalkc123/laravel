@@ -18,7 +18,7 @@
             <select name="student_id" class="w-full border px-3 py-2 rounded">
                 @foreach($students as $student)
                 <option value="{{ $student->id }}" {{ $enrollment->student_id == $student->id ? 'selected' : '' }}>
-                    {{ $student->name }}
+                    {{ $student->student_code }}
                 </option>
                 @endforeach
             </select>
@@ -29,7 +29,7 @@
             <select name="course_id" class="w-full border px-3 py-2 rounded">
                 @foreach($courses as $course)
                 <option value="{{ $course->id }}" {{ $enrollment->course_id == $course->id ? 'selected' : '' }}>
-                    {{ $course->name }}
+                    {{ $course->course_code }}
                 </option>
                 @endforeach
             </select>

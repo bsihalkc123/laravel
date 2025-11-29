@@ -4,27 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Symfony\Component\VarDumper\Cloner\Stub;
 
 class StudentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-      public function index(Request $request)
+    public function index()
     {
-        $search = $request->input('search');
-
-        $students = Student::query()
-            ->when($search, function ($query, $search) {
-                $query->where('first_name', 'like', "%{$search}%")
-                      ->orWhere('last_name', 'like', "%{$search}%")
-                      ->orWhere('student_code', 'like', "%{$search}%")
-                      ->orWhere('email', 'like', "%{$search}%");
-            })
-            ->orderBy('id', 'desc')
-            ->paginate(10);
-
-        return view('backend.student.index', compact('students', 'search'));
+        $students = Student::latest()->paginate(10);
+        return view('backend.student.index', compact('students'));
     }
 
     /**
@@ -38,8 +28,9 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-   public function store(Request $request)
+    public function store(Request $request)
     {
+        // Validation
         $request->validate([
             'student_code' => 'required|unique:students',
             'first_name' => 'required',
@@ -49,61 +40,78 @@ class StudentController extends Controller
             'date_of_birth' => 'required|date',
             'address' => 'required',
             'course' => 'required',
-            'enrollment_date' => 'required|date',
             'semester' => 'required',
+            'enrollment_date' => 'required|date',
         ]);
 
-        Student::create($request->all());
 
-        return redirect()->route('students.index')->with('success', 'Student created successfully.');
+        Student::create($request->all());
+        return redirect()->route('students.index')
+            ->with('success', 'Student created successfully.');
     }
-    /**
-     * Display the specified resource.
-     */
+
+    
+    // * Display the specified resource.
+    //  */
     public function show(string $id)
     {
-        //
+        $student = Student::findOrFail($id);
+        return view('backend.student.show', compact('student'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+    * Show the form for editing the specified resource.
      */
-    public function edit(Student $student)
+    public function edit(string $id)
     {
+        $student = Student::findOrFail($id);
         return view('backend.student.edit', compact('student'));
     }
 
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Student $student)
+    // /**
+    //  * Update the specified resource.
+    //  */
+    public function update(Request $request, string $id)
     {
+        $student = Student::findOrFail($id);
+
         $request->validate([
-            'student_code' => 'required|unique:students,student_code,' . $student->id,
+            'student_code' => 'required|unique:students,student_code,' . $id,
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|email|unique:students,email,' . $student->id,
+            'email' => 'required|email|unique:students,email,' . $id,
             'phone_number' => 'required',
             'date_of_birth' => 'required|date',
             'address' => 'required',
             'course' => 'required',
-            'enrollment_date' => 'required|date',
             'semester' => 'required',
+            'enrollment_date' => 'required|date',
         ]);
 
-        $student->update($request->all());
+        $student->update($request->only([
+            'student_code',
+            'first_name',
+            'last_name',
+            'email',
+            'phone_number',
+            'date_of_birth',
+            'address',
+            'course',
+            'semester',
+            'enrollment_date',
+        ]));
 
-        return redirect()->route('students.index')->with('success', 'Student updated successfully.');
+        return redirect()->route('student.index')
+            ->with('success', 'Student updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-   public function destroy(Student $student)
+    // /**
+    //  * Remove the specified resource from storage.
+    //  */
+    public function destroy(string $id)
     {
-        $student->delete();
-
-        return redirect()->route('students.index')->with('success', 'Student deleted successfully.');
+        Student::findOrFail($id)->delete();
+        return redirect()->route('student.index')
+            ->with('success', 'Student deleted successfully.');
     }
 }
