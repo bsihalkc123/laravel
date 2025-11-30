@@ -76,6 +76,11 @@
 
                     <!-- Action Buttons -->
                     <td class="py-3 px-3 flex gap-2 justify-center">
+                         <a href="{{ route('results.show', $result->id) }}" 
+                            class="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 shadow transition">
+                              View
+                        </a>
+                        
                         <a href="{{ route('results.edit', $result->id) }}"
                            class="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 shadow transition">
                             Edit

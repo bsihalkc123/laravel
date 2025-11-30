@@ -31,6 +31,7 @@ class Subject extends Model
     {
         return $this->belongsTo(Teacher::class);
     }
+    // Relationship: each subject has many results
       public function results()
     {
         return $this->hasMany(Result::class);

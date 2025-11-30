@@ -111,22 +111,22 @@
                 </a>
                 
                 <a href="{{ route('subjects.index') }}" class="sidebar-item flex items-center py-3 px-6 text-gray-700">
-                    <i class="fas fa-calendar-alt w-5 mr-3"></i>
+                    <i class="fas fa-book-open w-5 mr-3"></i>
                     <span>Subjects</span>
                 </a>
                 
                 <a href="{{ route('exams.index') }}" class="sidebar-item flex items-center py-3 px-6 text-gray-700">
-                    <i class="fas fa-file-invoice-dollar w-5 mr-3"></i>
+                    <i class="fas fa-file-alt w-5 mr-3"></i>
                     <span>Exams</span>
                 </a>
                 
                 <a href="{{ route('results.index') }}" class="sidebar-item flex items-center py-3 px-6 text-gray-700">
-                    <i class="fas fa-chart-bar w-5 mr-3"></i>
+                    <i class="fas fa-chart-line w-5 mr-3"></i>
                     <span>Results</span>
                 </a>
 
                 <a href="{{ route('enrollments.index') }}" class="sidebar-item flex items-center py-3 px-6 text-gray-700">
-                    <i class="fas fa-chart-bar w-5 mr-3"></i>
+                    <i class="fas fa-user-check w-5 mr-3"></i>
                     <span>Enrollments</span>
                 </a>
                 
@@ -148,8 +148,7 @@
         
         <!-- Main Content -->
         <div class="flex-1 overflow-auto">
-            <!-- Header -->
-            <header class="bg-white shadow-sm py-4 px-6 flex justify-between items-center">
+             <header class="bg-white shadow-sm py-4 px-6 flex justify-between items-center">
                 <div>
                     <h2 class="text-xl font-semibold text-gray-800">Dashboard</h2>
                     <p class="text-sm text-gray-500">Welcome to your student management dashboard</p>
@@ -172,7 +171,8 @@
                         <span class="ml-2 text-gray-700 font-medium">Bishal Kc</span>
                     </div>
                 </div>
-            </header>
+            </header> 
+
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
 
   <!-- Main Content Body -->

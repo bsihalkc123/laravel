@@ -84,6 +84,15 @@ class ResultController extends Controller
         return view('backend.result.edit', compact('result', 'students', 'exams', 'subjects'));
     }
 
+    public function show($id)
+    {
+    $result = Result::with(['student', 'exam', 'subject'])
+                ->findOrFail($id);
+
+    return view('backend.result.show', compact('result'));
+   }
+
+
     public function update(Request $request, $id)
     {
         $request->validate([
