@@ -43,8 +43,8 @@
                 <tr class="border-b hover:bg-blue-50 transition duration-200 text-center">
                     <td class="py-3 px-4">{{ $loop->iteration }}</td>
 
-                    <td class="py-3 px-4 font-semibold">{{ $enrollment->student->name }}</td>
-                    <td class="py-3 px-4">{{ $enrollment->course->name }}</td>
+                    <td class="py-3 px-4 font-semibold">{{ $enrollment->student->student_code}}</td>
+                    <td class="py-3 px-4">{{ $enrollment->course->course_name}}</td>
                     <td class="py-3 px-4">{{ $enrollment->enrollment_year }}</td>
                     <td class="py-3 px-4">
                         <span class="px-3 py-1 rounded-full 

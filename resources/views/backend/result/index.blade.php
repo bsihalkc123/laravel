@@ -49,7 +49,7 @@
                     <td class="py-3 px-3">{{ $loop->iteration }}</td>
 
                     <td class="py-3 px-3 font-semibold">
-                        {{ $result->student->name }}
+                        {{ $result->student->student_code }}
                     </td>
 
                     <td class="py-3 px-3">

@@ -12,6 +12,7 @@ use App\Http\Controllers\ResultController;
 use App\Http\Controllers\EnrollmentController;
 
 // Redirect home to login
+
 Route::redirect('/', '/login');
 
 // Guest routes (only for unauthenticated users)
