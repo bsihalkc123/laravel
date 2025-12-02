@@ -21,7 +21,7 @@
       </button>
     </form>
 
-    <a href="{{ route('dashboard') }}" class="block text-blue-600 hover:underline mt-4">Cancel</a>
+    <a href="{{ route('Admindashboard') }}" class="block text-blue-600 hover:underline mt-4">Cancel</a>
   </div>
 </body>
 </html>

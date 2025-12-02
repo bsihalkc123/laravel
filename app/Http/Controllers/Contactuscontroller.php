@@ -6,88 +6,98 @@ use App\Models\Contactus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AdminContactNotification;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Log;
 
 class ContactUsController extends Controller
 {
-    // Show contact form (backend)
+    /**
+     * Show frontend contact form (homepage)
+     */
     public function create()
     {
-        return view('backend.contactus.create');
+        // Frontend homepage with contact form
+        return view('frontend.frontdashboard');
     }
 
-    // Store form data
+    /**
+     * Store contact form submission
+     */
     public function store(Request $request)
     {
-       
+        // Validate form input
         $request->validate([
-            'full_name'     => 'required|string|max:255',
-            'email'         => 'required|email',
-            'request_type'  => 'required|string',
-            'message'       => 'required|string',
+            'full_name'    => 'required|string|max:255',
+            'email'        => 'required|email',
+            'request_type' => 'required|string',
+            'message'      => 'required|string',
         ]);
 
-
+        // Save message to database
         $contact = Contactus::create([
-            'full_name'     => $request->full_name,
-            'email'         => $request->email,
-            'request_type'  => $request->request_type,
-            'message'       => $request->message,
+            'full_name'    => $request->full_name,
+            'email'        => $request->email,
+            'request_type' => $request->request_type,
+            'message'      => $request->message,
         ]);
 
-
+        // Send email notification to admin
         try {
-            Mail::to('csit22081043_bishal@achsnepal.edu.np')->send(new AdminContactNotification($contact));
+            Mail::to('csit22081043_bishal@achsnepal.edu.np')
+                ->send(new AdminContactNotification($contact));
         } catch (\Exception $e) {
-            // Log the error or handle it as needed
             Log::error('Failed to send contact notification email: ' . $e->getMessage());
         }
 
-
-
-        return redirect()->route('contactus.index')
-            ->with('success', 'Message sent successfully!');
+        // Stay on frontend page with success message
+        return redirect()->back()->with('success', 'Message sent successfully!');
     }
 
-    // Admin: show all messages
+    /**
+     * Admin: show all messages
+     */
     public function index()
     {
+        // Paginate messages for admin dashboard
         $messages = Contactus::latest()->paginate(10);
         return view('backend.contactus.index', compact('messages'));
     }
 
-    // Show edit page
+    /**
+     * Show edit form for a message (admin)
+     */
     public function edit($id)
     {
         $message = Contactus::findOrFail($id);
         return view('backend.contactus.edit', compact('message'));
     }
 
-    // Update contact message
+    /**
+     * Update a contact message (admin)
+     */
     public function update(Request $request, $id)
     {
         $request->validate([
-            'full_name'     => 'required|string|max:255',
-            'email'         => 'required|email',
-            'request_type'  => 'required|string',
-            'message'       => 'required|string',
+            'full_name'    => 'required|string|max:255',
+            'email'        => 'required|email',
+            'request_type' => 'required|string',
+            'message'      => 'required|string',
         ]);
 
         $message = Contactus::findOrFail($id);
-
         $message->update([
-            'full_name'     => $request->full_name,
-            'email'         => $request->email,
-            'request_type'  => $request->request_type,
-            'message'       => $request->message,
+            'full_name'    => $request->full_name,
+            'email'        => $request->email,
+            'request_type' => $request->request_type,
+            'message'      => $request->message,
         ]);
 
         return redirect()->route('contactus.index')
             ->with('success', 'Message updated successfully!');
     }
 
-    // Admin: delete a message
+    /**
+     * Delete a contact message (admin)
+     */
     public function destroy($id)
     {
         Contactus::findOrFail($id)->delete();
