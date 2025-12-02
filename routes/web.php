@@ -14,7 +14,7 @@ use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\ContactUsController;
 
 // Redirect home to login
-Route::redirect('/', '/login');
+Route::redirect('/','/login');
 
 // Guest routes (unauthenticated users)
 Route::middleware('guest')->group(function () {

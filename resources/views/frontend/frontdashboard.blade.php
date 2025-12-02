@@ -121,7 +121,7 @@
                     </div>
                 @endif
 
-                <form action="{{ route('user.dashboard.contact') }}" method="POST" class="space-y-4">
+                <form action="{{ route('contactus.store') }}" method="POST" class="space-y-4">
                     @csrf
                     <div>
                         <input type="text" name="full_name" placeholder="Full Name"

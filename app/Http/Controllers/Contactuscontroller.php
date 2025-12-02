@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Contactus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AdminContactNotification;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\View;
 
 class ContactUsController extends Controller
 {
@@ -16,6 +20,7 @@ class ContactUsController extends Controller
     // Store form data
     public function store(Request $request)
     {
+       
         $request->validate([
             'full_name'     => 'required|string|max:255',
             'email'         => 'required|email',
@@ -23,15 +28,26 @@ class ContactUsController extends Controller
             'message'       => 'required|string',
         ]);
 
-        Contactus::create([
+
+        $contact = Contactus::create([
             'full_name'     => $request->full_name,
             'email'         => $request->email,
             'request_type'  => $request->request_type,
             'message'       => $request->message,
         ]);
 
+
+        try {
+            Mail::to('csit22081043_bishal@achsnepal.edu.np')->send(new AdminContactNotification($contact));
+        } catch (\Exception $e) {
+            // Log the error or handle it as needed
+            Log::error('Failed to send contact notification email: ' . $e->getMessage());
+        }
+
+
+
         return redirect()->route('contactus.index')
-                         ->with('success', 'Message sent successfully!');
+            ->with('success', 'Message sent successfully!');
     }
 
     // Admin: show all messages
@@ -45,7 +61,7 @@ class ContactUsController extends Controller
     public function edit($id)
     {
         $message = Contactus::findOrFail($id);
-        return view('contactus.edit', compact('message'));
+        return view('backend.contactus.edit', compact('message'));
     }
 
     // Update contact message
@@ -68,7 +84,7 @@ class ContactUsController extends Controller
         ]);
 
         return redirect()->route('contactus.index')
-                         ->with('success', 'Message updated successfully!');
+            ->with('success', 'Message updated successfully!');
     }
 
     // Admin: delete a message
@@ -77,6 +93,6 @@ class ContactUsController extends Controller
         Contactus::findOrFail($id)->delete();
 
         return redirect()->route('contactus.index')
-                         ->with('success', 'Message deleted successfully!');
+            ->with('success', 'Message deleted successfully!');
     }
 }

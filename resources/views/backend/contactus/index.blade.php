@@ -5,10 +5,6 @@
 <div class="p-8">
 <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
     <h2 class="text-3xl font-bold mb-6 text-gray-800">📬 Contact Messages</h2>
-    <a href="{{ route('contactus.create') }}"
-           class="bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition shadow">
-            + Add Message
-        </a>
 </div>
 
     @if(session('success'))
