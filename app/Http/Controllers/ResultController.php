@@ -86,12 +86,15 @@ class ResultController extends Controller
 
     public function show($id)
     {
-    $result = Result::with(['student', 'exam', 'subject'])
-                ->findOrFail($id);
+        $result = Result::with(['student', 'exam', 'subject'])->findOrFail($id);
 
-    return view('backend.result.show', compact('result'));
-   }
+        $student = $result->student;
+        $results = Result::with(['subject', 'exam'])
+                        ->where('student_id', $student->id)
+                        ->get();
 
+        return view('backend.result.show', compact('student', 'results'));
+    }
 
     public function update(Request $request, $id)
     {

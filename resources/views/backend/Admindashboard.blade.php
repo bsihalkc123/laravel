@@ -90,7 +90,7 @@
             <div class="py-4">
                 <a href="#" class="sidebar-item active flex items-center py-3 px-6 text-gray-700">
                     <i class="fas fa-tachometer-alt w-5 mr-3"></i>
-                    <span>Dashboard</span>
+                    <span>AdminDashboard</span>
                 </a>
 
                 <a href="{{ route('students.index') }}" class="sidebar-item flex items-center py-3 px-6 text-gray-700">
@@ -129,6 +129,11 @@
                     <i class="fas fa-user-check w-5 mr-3"></i>
                     <span>Enrollments</span>
                 </a>
+                <a href="{{ route('contactus.index') }}" class="sidebar-item flex items-center py-3 px-6 text-gray-700">
+                      <i class="fas fa-envelope w-5 mr-3"></i>
+                      <span>Inbox</span>
+                </a>
+
                 
                 <a href="#" class="sidebar-item flex items-center py-3 px-6 text-gray-700">
                     <i class="fas fa-cog w-5 mr-3"></i>
@@ -150,7 +155,7 @@
         <div class="flex-1 overflow-auto">
              <header class="bg-white shadow-sm py-4 px-6 flex justify-between items-center">
                 <div>
-                    <h2 class="text-xl font-semibold text-gray-800">Dashboard</h2>
+                    <h2 class="text-xl font-semibold text-gray-800">AdminDashboard</h2>
                     <p class="text-sm text-gray-500">Welcome to your student management dashboard</p>
                 </div>
                 
@@ -176,7 +181,7 @@
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
 
   <!-- Main Content Body -->
-  <div class="p-6 min-h-screen bg-gradient-to-r from-black via-gray-600 to-black">
+  <div class="p-6 min-h-screen bg-gradient-to-r from-white via-gray-600 to-white">
 
       <!-- Stats Cards -->
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-6">
@@ -257,262 +262,8 @@
               </div>
           </div>
       </div>
+      <div class="">
 
-      <!-- Charts Section -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <!-- Student Enrollment Chart -->
-          <div class="bg-white p-6 rounded-xl shadow-lg">
-              <h4 class="text-lg font-semibold mb-4">Student Enrollment Over Months</h4>
-              <canvas id="enrollmentChart" class="w-full h-64"></canvas>
-          </div>
-
-          <!-- Exams Performance Chart -->
-          <div class="bg-white p-6 rounded-xl shadow-lg">
-              <h4 class="text-lg font-semibold mb-4">Exams Performance</h4>
-              <canvas id="examChart" class="w-full h-64"></canvas>
-          </div>
       </div>
-
-      <!-- Progress Bars Section -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          <div class="bg-white p-6 rounded-xl shadow-lg">
-              <h4 class="text-lg font-semibold mb-3">Attendance Progress</h4>
-              <div class="w-full bg-gray-200 rounded-full h-4 mb-2">
-                  <div class="bg-green-500 h-4 rounded-full" style="width: 85%;"></div>
-              </div>
-              <p class="text-sm text-gray-600">85% Attendance this month</p>
-          </div>
-
-          <div class="bg-white p-6 rounded-xl shadow-lg">
-              <h4 class="text-lg font-semibold mb-3">Course Completion</h4>
-              <div class="w-full bg-gray-200 rounded-full h-4 mb-2">
-                  <div class="bg-blue-500 h-4 rounded-full" style="width: 60%;"></div>
-              </div>
-              <p class="text-sm text-gray-600">60% Courses Completed</p>
-          </div>
-
-          <div class="bg-white p-6 rounded-xl shadow-lg">
-              <h4 class="text-lg font-semibold mb-3">Fee Collection</h4>
-              <div class="w-full bg-gray-200 rounded-full h-4 mb-2">
-                  <div class="bg-yellow-500 h-4 rounded-full" style="width: 75%;"></div>
-              </div>
-              <p class="text-sm text-gray-600">75% Fees Collected</p>
-          </div>
-      </div>
-
-      <!-- Latest Students & Upcoming Exams Tables -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-          <!-- Latest Students Table -->
-          <div class="bg-white p-6 rounded-xl shadow-lg overflow-x-auto">
-              <h4 class="text-lg font-semibold mb-4">Latest Students</h4>
-              <table class="w-full text-left text-gray-700">
-                  <thead class="bg-gray-100">
-                      <tr>
-                          <th class="py-2 px-3">ID</th>
-                          <th class="py-2 px-3">Name</th>
-                          <th class="py-2 px-3">Course</th>
-                          <th class="py-2 px-3">Enrolled</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr class="border-b hover:bg-gray-50">
-                          <td class="py-2 px-3">1</td>
-                          <td class="py-2 px-3">John Doe</td>
-                          <td class="py-2 px-3">Math</td>
-                          <td class="py-2 px-3">2025-11-01</td>
-                      </tr>
-                      <tr class="border-b hover:bg-gray-50">
-                          <td class="py-2 px-3">2</td>
-                          <td class="py-2 px-3">Jane Smith</td>
-                          <td class="py-2 px-3">Science</td>
-                          <td class="py-2 px-3">2025-11-03</td>
-                      </tr>
-                      <tr class="border-b hover:bg-gray-50">
-                          <td class="py-2 px-3">3</td>
-                          <td class="py-2 px-3">Alex Johnson</td>
-                          <td class="py-2 px-3">English</td>
-                          <td class="py-2 px-3">2025-11-05</td>
-                      </tr>
-                  </tbody>
-              </table>
-          </div>
-
-          <!-- Upcoming Exams Table -->
-          <div class="bg-white p-6 rounded-xl shadow-lg overflow-x-auto">
-              <h4 class="text-lg font-semibold mb-4">Upcoming Exams</h4>
-              <table class="w-full text-left text-gray-700">
-                  <thead class="bg-gray-100">
-                      <tr>
-                          <th class="py-2 px-3">Exam</th>
-                          <th class="py-2 px-3">Course</th>
-                          <th class="py-2 px-3">Date</th>
-                          <th class="py-2 px-3">Status</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr class="border-b hover:bg-gray-50">
-                          <td class="py-2 px-3">Mid Term</td>
-                          <td class="py-2 px-3">Math</td>
-                          <td class="py-2 px-3">2025-12-01</td>
-                          <td class="py-2 px-3"><span class="text-yellow-600 font-semibold">Pending</span></td>
-                      </tr>
-                      <tr class="border-b hover:bg-gray-50">
-                          <td class="py-2 px-3">Final Exam</td>
-                          <td class="py-2 px-3">Science</td>
-                          <td class="py-2 px-3">2025-12-10</td>
-                          <td class="py-2 px-3"><span class="text-red-600 font-semibold">Scheduled</span></td>
-                      </tr>
-                      <tr class="border-b hover:bg-gray-50">
-                          <td class="py-2 px-3">Quiz</td>
-                          <td class="py-2 px-3">English</td>
-                          <td class="py-2 px-3">2025-11-30</td>
-                          <td class="py-2 px-3"><span class="text-green-600 font-semibold">Upcoming</span></td>
-                      </tr>
-                  </tbody>
-              </table>
-          </div>
-      </div>
-
-     <!-- Interactive Calendar Widget -->
-<div class="bg-white p-6 rounded-xl shadow-lg mb-6 w-full md:w-1/3">
-    <h4 class="text-lg font-semibold mb-4">Calendar</h4>
-    <div class="flex justify-between items-center mb-4">
-        <button id="prevMonth" class="text-gray-600 hover:text-gray-900">&lt;</button>
-        <h5 id="monthYear" class="font-semibold text-gray-700"></h5>
-        <button id="nextMonth" class="text-gray-600 hover:text-gray-900">&gt;</button>
-    </div>
-
-    <div class="grid grid-cols-7 gap-2 text-center mb-2 font-semibold text-gray-700">
-        <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
-    </div>
-
-    <div id="calendarDays" class="grid grid-cols-7 gap-2 text-center"></div>
-</div>
-
-<script>
-const calendarDays = document.getElementById('calendarDays');
-const monthYear = document.getElementById('monthYear');
-const prevMonthBtn = document.getElementById('prevMonth');
-const nextMonthBtn = document.getElementById('nextMonth');
-
-// Example exam dates
-const exams = {
-    "2025-12-01": "Math Mid Term",
-    "2025-12-10": "Science Final Exam",
-    "2025-11-30": "English Quiz"
-};
-
-let currentDate = new Date();
-
-function renderCalendar(date) {
-    calendarDays.innerHTML = "";
-    const year = date.getFullYear();
-    const month = date.getMonth();
-    monthYear.textContent = date.toLocaleString('default', { month: 'long', year: 'numeric' });
-
-    const firstDay = new Date(year, month, 1).getDay();
-    const lastDate = new Date(year, month + 1, 0).getDate();
-
-    // Empty slots before first day
-    for(let i = 0; i < firstDay; i++) {
-        const emptyCell = document.createElement('div');
-        calendarDays.appendChild(emptyCell);
-    }
-
-    // Days of month
-    for(let day = 1; day <= lastDate; day++) {
-        const dayCell = document.createElement('div');
-        const fullDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2,'0')}`;
-
-        dayCell.textContent = day;
-        dayCell.classList.add("py-2", "rounded-full", "cursor-pointer", "hover:bg-gray-200");
-
-        // Highlight today's date
-        const today = new Date();
-        if(day === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
-            dayCell.classList.add("bg-blue-500", "text-white");
-        }
-
-        // Highlight exam dates
-        if(exams[fullDate]) {
-            dayCell.classList.add("bg-red-400", "text-white", "font-semibold");
-            dayCell.title = exams[fullDate]; // Show exam name on hover
-        }
-
-        // Click to alert exam details
-        dayCell.addEventListener('click', () => {
-            if(exams[fullDate]){
-                alert(`Exam: ${exams[fullDate]}\nDate: ${fullDate}`);
-            } else {
-                alert(`No event on ${fullDate}`);
-            }
-        });
-
-        calendarDays.appendChild(dayCell);
-    }
-}
-
-// Navigation buttons
-prevMonthBtn.addEventListener('click', () => {
-    currentDate.setMonth(currentDate.getMonth() - 1);
-    renderCalendar(currentDate);
-});
-nextMonthBtn.addEventListener('click', () => {
-    currentDate.setMonth(currentDate.getMonth() + 1);
-    renderCalendar(currentDate);
-});
-
-// Initial render
-renderCalendar(currentDate);
-</script>
-
-  <!-- Chart.js Script -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-      const enrollmentCtx = document.getElementById('enrollmentChart').getContext('2d');
-      new Chart(enrollmentCtx, {
-          type: 'line',
-          data: {
-              labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
-              datasets: [{
-                  label: 'Students',
-                  data: [20, 25, 30, 28, 35, 40, 42, 42],
-                  backgroundColor: 'rgba(59, 130, 246, 0.2)',
-                  borderColor: 'rgba(59, 130, 246, 1)',
-                  borderWidth: 2,
-                  fill: true,
-                  tension: 0.3
-              }]
-          },
-          options: {
-              responsive: true,
-              plugins: { legend: { display: false } },
-              scales: { y: { beginAtZero: true } }
-          }
-      });
-
-      const examCtx = document.getElementById('examChart').getContext('2d');
-      new Chart(examCtx, {
-          type: 'bar',
-          data: {
-              labels: ['Math', 'Science', 'English', 'History', 'Art'],
-              datasets: [{
-                  label: 'Average Marks',
-                  data: [75, 88, 92, 70, 80],
-                  backgroundColor: [
-                      '#f87171', '#60a5fa', '#34d399', '#fbbf24', '#a78bfa'
-                  ],
-                  borderRadius: 5,
-                  barThickness: 30
-              }]
-          },
-          options: {
-              responsive: true,
-              plugins: { legend: { display: false } },
-              scales: { y: { beginAtZero: true, max: 100 } }
-          }
-      });
-  </script>
-
 </body>
 
