@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Asian College - Student Management System</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap"
+    rel="stylesheet">
   <style>
     /* General Reset */
     * {
@@ -19,6 +21,12 @@
       line-height: 1.6;
       background-color: #f5f5f5;
       color: #333;
+      scroll-behavior: smooth;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
     }
 
     /* Navbar */
@@ -29,14 +37,15 @@
       padding: 15px 30px;
       background-color: #004080;
       color: #fff;
-      flex-wrap: wrap;
       position: sticky;
       top: 0;
       z-index: 1000;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+      flex-wrap: wrap;
     }
 
     nav .logo {
-      font-size: 1.5em;
+      font-size: 1.7em;
       font-weight: bold;
       display: flex;
       align-items: center;
@@ -45,7 +54,7 @@
 
     nav .contact-info {
       display: flex;
-      gap: 20px;
+      gap: 25px;
       align-items: center;
       flex-wrap: wrap;
       margin-top: 10px;
@@ -55,18 +64,30 @@
       display: flex;
       align-items: center;
       gap: 5px;
+      font-size: 0.95em;
     }
 
     nav .social-icons a {
       color: #fff;
       margin-left: 10px;
-      text-decoration: none;
-      font-size: 1em;
+      font-size: 0.9em;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    nav .social-icons a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      left: 0;
+      bottom: -2px;
+      background-color: #ffcc00;
       transition: 0.3s;
     }
 
-    nav .social-icons a:hover {
-      color: #ffcc00;
+    nav .social-icons a:hover::after {
+      width: 100%;
     }
 
     .from-registration {
@@ -79,8 +100,8 @@
       align-items: center;
       gap: 5px;
       cursor: pointer;
-      padding: 5px 15px;
-      border-radius: 5px;
+      padding: 7px 18px;
+      border-radius: 6px;
       transition: 0.3s;
       background-color: #0066cc;
       color: #fff;
@@ -93,75 +114,115 @@
 
     .from-registration div a {
       color: #fff;
-      text-decoration: none;
     }
 
-    /* Hero Section */
-    .hero {
-      background: linear-gradient(rgba(0, 64, 128, 0.7), rgba(0, 64, 128, 0.7)),
-        url('https://images.unsplash.com/photo-1596495577886-d920f4c5a182?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
-      color: #fff;
-      min-height: 500px;
+    /* Navbar Logo Styling */
+    .logo {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-      text-align: center;
-      padding: 0 20px;
+      gap: 10px;
     }
 
-    .hero h1 {
-      font-size: 3em;
-      margin-bottom: 20px;
-      animation: fadeInDown 1s ease-in-out;
-    }
-
-    .hero p {
-      font-size: 1.3em;
-      margin-bottom: 30px;
-      max-width: 700px;
-      animation: fadeInUp 1s ease-in-out;
-    }
-
-    .hero .btn {
-      padding: 15px 30px;
-      font-size: 1.1em;
-      background-color: #ffcc00;
-      color: #004080;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
+    .logo-img {
+      height: 130px;
+      width: auto;
+      object-fit: contain;
       transition: 0.3s;
-      font-weight: bold;
-      margin: 5px;
     }
 
-    .hero .btn:hover {
-      background-color: #e6b800;
-    }
-
-    @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
+    @media (max-width: 600px) {
+      .logo-img {
+        height: 50px;
       }
+    }
 
+    /* Slider Section */
+    .hero-slider {
+      position: relative;
+      width: 100%;
+      max-height: 550px;
+      overflow: hidden;
+    }
+
+    .slides-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+      height: 550px;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .slide.active {
+      display: block;
+      animation: fade 1s ease-in-out;
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0.4;
+      }
       to {
         opacity: 1;
-        transform: translateY(0);
       }
     }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
+    /* Arrows */
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2em;
+      color: #ffcc00;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 10;
+      user-select: none;
+    }
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .prev {
+      left: 20px;
+    }
+
+    .next {
+      right: 20px;
+    }
+
+    .arrow:hover {
+      color: #fff;
+    }
+
+    /* Dots */
+    .dots {
+      text-align: center;
+      position: absolute;
+      bottom: 15px;
+      width: 100%;
+      z-index: 10;
+    }
+
+    .dot {
+      height: 12px;
+      width: 12px;
+      margin: 0 5px;
+      display: inline-block;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .dot.active {
+      background-color: #ffcc00;
     }
 
     /* Statistics Cards */
@@ -169,57 +230,60 @@
       display: flex;
       justify-content: center;
       gap: 30px;
-      padding: 60px 20px;
+      padding: 80px 20px;
       flex-wrap: wrap;
       background-color: #f0f4f8;
     }
 
     .card {
-      background-color: #fff;
+      background: linear-gradient(135deg, #004080, #0066cc);
       flex: 1 1 250px;
       max-width: 300px;
-      padding: 30px 20px;
-      border-radius: 10px;
+      padding: 35px 20px;
+      border-radius: 15px;
       text-align: center;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      transition: 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      color: #fff;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      transition: 0.5s;
+      position: relative;
+      overflow: hidden;
     }
 
     .card i {
-      font-size: 3em;
-      color: #004080;
+      font-size: 3.5em;
       margin-bottom: 15px;
+      transition: 0.3s;
     }
 
     .card h3 {
       margin-bottom: 10px;
       font-size: 1.5em;
-      color: #004080;
     }
 
     .card p {
       font-size: 1em;
-      color: #555;
+      color: #f0f0f0;
+    }
+
+    .card:hover {
+      transform: translateY(-8px) rotate(1deg);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
     }
 
     /* Footer / Contact Form */
     footer {
       background-color: #004080;
       color: #fff;
-      padding: 60px 20px;
+      padding: 70px 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
     footer h3 {
-      margin-bottom: 20px;
-      font-size: 1.8em;
+      margin-bottom: 25px;
+      font-size: 2em;
+      font-weight: 600;
     }
 
     footer form {
@@ -227,44 +291,64 @@
       flex-direction: column;
       width: 100%;
       max-width: 500px;
-      gap: 15px;
+      gap: 20px;
       background-color: #fff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      padding: 35px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
       color: #333;
+    }
+
+    footer .form-group {
+      position: relative;
     }
 
     footer input,
     footer textarea,
     footer select {
-      padding: 12px 15px;
-      border-radius: 6px;
+      padding: 14px 15px;
+      border-radius: 8px;
       border: 1px solid #ccc;
       font-size: 1em;
       width: 100%;
+      outline: none;
+      transition: 0.3s;
     }
 
     footer input:focus,
     footer textarea:focus,
     footer select:focus {
-      outline: 2px solid #ffcc00;
+      border-color: #004080;
+      box-shadow: 0 0 5px #ffcc00;
+    }
+
+    footer label {
+      position: absolute;
+      top: -8px;
+      left: 12px;
+      background-color: #fff;
+      padding: 0 5px;
+      font-size: 0.85em;
+      color: #004080;
+      font-weight: 500;
     }
 
     footer button {
-      padding: 12px;
+      padding: 14px;
       border: none;
-      border-radius: 6px;
-      background-color: #ffcc00;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #ffcc00, #e6b800);
       color: #004080;
       font-weight: bold;
       font-size: 1em;
       cursor: pointer;
-      transition: 0.3s;
+      transition: 0.4s;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
 
     footer button:hover {
-      background-color: #e6b800;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
     }
 
     .success-msg {
@@ -274,6 +358,7 @@
       border-radius: 8px;
       margin-bottom: 15px;
       text-align: center;
+      font-weight: 500;
     }
 
     /* Responsive */
@@ -289,18 +374,6 @@
         margin-top: 10px;
       }
 
-      .from-registration {
-        gap: 10px;
-      }
-
-      .hero h1 {
-        font-size: 2.2em;
-      }
-
-      .hero p {
-        font-size: 1.1em;
-      }
-
       .stats {
         flex-direction: column;
         align-items: center;
@@ -313,37 +386,59 @@
   <!-- Navbar -->
   <nav>
     <div class="logo">
-      <i class="fas fa-graduation-cap"></i>
-      Asian College
+      <img src="{{ asset('logo.png') }}" alt="Asian College Logo" class="logo-img">
+      <span>Asian College</span>x
     </div>
     <div class="contact-info">
       <div><i class="fas fa-map-marker-alt"></i> Ekantakuna Kathmandu, Nepal</div>
       <div><i class="fas fa-phone"></i> 01-5912727</div>
       <div class="social-icons">
-        <a href="#"><i class="fab fa-facebook-f"></i> Facebook</a>
-        <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
-        <a href="#"><i class="fab fa-tiktok"></i> TikTok</a>
+        <a href="https://www.facebook.com/achscollege"><i class="fab fa-facebook-f"></i> Facebook</a>
+        <a href="https://www.instagram.com/achscollege/"><i class="fab fa-instagram"></i> Instagram</a>
+        <a href="https://www.tiktok.com/@achscollege"><i class="fab fa-tiktok"></i> TikTok</a>
       </div>
       <div class="from-registration">
         <div>
-          <a href="{{ route('login') }}">
-            <i class="fas fa-sign-in-alt"></i> Login
-          </a>
+          <a href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
         </div>
       </div>
     </div>
   </nav>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <h1>Welcome to Asian College</h1>
-    <p>Your complete student management system for courses, exams, results, and more. Simplifying academic
-      administration with modern tools and real-time insights.</p>
-    <div>
-      <button class="btn" onclick="window.location='{{ route('login') }}'">Get Started</button>
-      <button class="btn" style="background-color:#fff;color:#004080;" onclick="document.getElementById('stats').scrollIntoView({behavior:'smooth'});">Learn More</button>
+ <!-- Slider Section -->
+<section class="hero-slider">
+  <div class="slides-container">
+    <div class="slide active">
+      <img src="{{ asset('images/slider/graduation.jpg') }}" alt="Graduation">
     </div>
-  </section>
+    <div class="slide">
+      <img src="{{ asset('images/slider/culturalfest.jpg') }}" alt="Cultural Festa">
+    </div>
+    <div class="slide">
+      <img src="{{ asset('images/slider/defenseproject.jpg') }}" alt="Defense Project">
+    </div>
+    <div class="slide">
+      <img src="{{ asset('images/slider/holi.jpg') }}" alt="Holi Celebration">
+    </div>
+    <div class="slide">
+      <img src="{{ asset('images/slider/orientation.jpg') }}" alt="Orientation">
+    </div>
+
+    <!-- Arrows -->
+    <div class="arrow prev">&#10094;</div>
+    <div class="arrow next">&#10095;</div>
+
+    <!-- Navigation Dots -->
+    <div class="dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+</section>
+
 
   <!-- Statistics Cards -->
   <section class="stats" id="stats">
@@ -374,28 +469,60 @@
     </div>
     @endif
 
-   <form action="{{ route('contactus.store') }}" method="POST">
-    @csrf
-
-    <input type="text" name="full_name" placeholder="Your Name" required maxlength="255">
-    <input type="email" name="email" placeholder="Your Email" required maxlength="255">
-
-    <div class="custom-select">
+    <form action="{{ route('contactus.store') }}" method="POST">
+      @csrf
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" name="full_name" placeholder="Your Name" required maxlength="255">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="Your Email" required maxlength="255">
+      </div>
+      <div class="form-group">
+        <label>Request Type</label>
         <select name="request_type" required>
-            <option value="" disabled selected>Select your request</option>
-            <option value="general">General</option>
-            <option value="technical">Technical</option>
-            <option value="payment">Payment</option>
-            <option value="feedback">Feedback</option>
+          <option value="" disabled selected>Select your request</option>
+          <option value="general">General</option>
+          <option value="technical">Technical</option>
+          <option value="payment">Payment</option>
+          <option value="feedback">Feedback</option>
         </select>
-    </div>
-
-    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-
-    <button type="submit"><i class="fas fa-paper-plane"></i> Send Message</button>
-</form>
-
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+      </div>
+      <button type="submit"><i class="fas fa-paper-plane"></i> Send Message</button>
+    </form>
   </footer>
+
+  <!-- Slider JS -->
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+
+    function showSlide(index) {
+      if (index >= slides.length) currentSlide = 0;
+      else if (index < 0) currentSlide = slides.length - 1;
+      else currentSlide = index;
+
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === currentSlide);
+        dots[i].classList.toggle('active', i === currentSlide);
+      });
+    }
+
+    document.querySelector('.next').addEventListener('click', () => showSlide(currentSlide + 1));
+    document.querySelector('.prev').addEventListener('click', () => showSlide(currentSlide - 1));
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => showSlide(i));
+    });
+
+    setInterval(() => showSlide(currentSlide + 1), 5000);
+  </script>
 </body>
 
 </html>

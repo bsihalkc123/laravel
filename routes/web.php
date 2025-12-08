@@ -24,6 +24,9 @@ Route::post('/contactus', [ContactUsController::class, 'store'])->name('contactu
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'Submitlogin'])->name('login.submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
+Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
+
 
 // -----------------------
 // ADMIN DASHBOARD
