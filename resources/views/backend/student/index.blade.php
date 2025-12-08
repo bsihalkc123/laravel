@@ -33,13 +33,16 @@
             </button>
         </form>
 
-        <!-- Add New Button -->
+        <!-- Add New Button (Permission-Based) -->
+       @role('admin')
         <a
             href="{{ route('students.create') }}"
             class="bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition shadow"
         >
             + Add New Student
         </a>
+        @endrole
+       
     </div>
 
     <!-- Table Container -->
@@ -81,15 +84,19 @@
                     <td class="py-3 px-4">{{ $student->phone_number }}</td>
                     <td class="py-3 px-4">{{ $student->semester }}</td>
 
-                    <!-- Action Buttons -->
+                    <!-- Action Buttons (Permission-Based) -->
+                    @role('admin')
                     <td class="py-3 px-4 flex gap-2">
+                      
                         <a
                             href="{{ route('students.edit', $student->id) }}"
                             class="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 shadow transition flex items-center gap-1"
                         >
                             <i class="fas fa-edit"></i> Edit
                         </a>
+                      @endrole 
 
+                        @role('admin')
                         <form
                             action="{{ route('students.destroy', $student->id) }}"
                             method="POST"
@@ -103,9 +110,10 @@
                                 <i class="fas fa-trash"></i> Delete
                             </button>
                         </form>
+                    @endrole
                     </td>
                 </tr>
-                @endforeach
+               @endforeach
             </tbody>
 
             <!-- Table Footer -->

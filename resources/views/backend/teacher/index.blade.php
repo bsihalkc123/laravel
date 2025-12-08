@@ -34,12 +34,13 @@
                 Search
             </button>
         </form>
-
+        @role('admin')
         <!-- Add Teacher Button -->
         <a href="{{ route('teachers.create') }}" 
            class="bg-green-600 text-white px-5 py-2 rounded-lg hover:bg-green-700 transition shadow">
             + Add New Teacher
         </a>
+        @endrole    
     </div>
 
     <!-- Table Container -->
@@ -76,11 +77,13 @@
                     <td class="py-3 px-4">{{ $teacher->address }}</td>
 
                     <!-- Action Buttons -->
+                    @role('admin')
                     <td class="py-3 px-4 flex gap-2">
                         <a href="{{ route('teachers.edit', $teacher->id) }}" 
                            class="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 shadow transition flex items-center gap-1">
                             <i class="fas fa-edit"></i> Edit
                         </a>
+                    
 
                         <form action="{{ route('teachers.destroy', $teacher->id) }}" method="POST"
                               onsubmit="return confirm('Are you sure?')" class="inline-block">
@@ -93,6 +96,7 @@
                         </form>
                     </td>
                 </tr>
+                @endrole
 
                 @empty
                 <tr>

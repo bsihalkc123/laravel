@@ -124,7 +124,7 @@
     }
 
     .logo-img {
-      height: 130px;
+      height: 100px;
       width: auto;
       object-fit: contain;
       transition: 0.3s;
@@ -387,7 +387,6 @@
   <nav>
     <div class="logo">
       <img src="{{ asset('logo.png') }}" alt="Asian College Logo" class="logo-img">
-      <span>Asian College</span>x
     </div>
     <div class="contact-info">
       <div><i class="fas fa-map-marker-alt"></i> Ekantakuna Kathmandu, Nepal</div>

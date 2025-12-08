@@ -37,10 +37,12 @@
         </form>
 
         <!-- Add Exam Button -->
+        @role('admin|teacher')
         <a href="{{ route('exams.create') }}"
            class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition shadow">
             + Add New Exam
         </a>
+        @endrole
     </div>
 
     <!-- Table Container -->
@@ -85,6 +87,8 @@
                     <td class="py-3 px-4 flex gap-2">
                         
                         <!-- Edit Button -->
+                    @role('admin|teacher')
+                    
                         <a href="{{ route('exams.edit', $exam->id) }}"
                            class="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 shadow transition">
                             Edit
@@ -103,6 +107,7 @@
                                 Delete
                             </button>
                         </form>
+                    @endrole
                     </td>
 
                 </tr>

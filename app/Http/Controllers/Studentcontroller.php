@@ -4,33 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
-use Symfony\Component\VarDumper\Cloner\Stub;
+use Illuminate\Routing\Controller as BaseController;
 
-class StudentController extends Controller
+class StudentController extends BaseController
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $students = Student::latest()->paginate(10);
         return view('backend.student.index', compact('students'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('backend.student.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        // Validation
         $request->validate([
             'student_code' => 'required|unique:students',
             'first_name' => 'required',
@@ -44,33 +34,24 @@ class StudentController extends Controller
             'enrollment_date' => 'required|date',
         ]);
 
-
         Student::create($request->all());
+
         return redirect()->route('students.index')
             ->with('success', 'Student created successfully.');
     }
 
-    
-    // * Display the specified resource.
-    //  */
     public function show(string $id)
     {
         $student = Student::findOrFail($id);
         return view('backend.student.show', compact('student'));
     }
 
-    /**
-    * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $student = Student::findOrFail($id);
         return view('backend.student.edit', compact('student'));
     }
 
-    // /**
-    //  * Update the specified resource.
-    //  */
     public function update(Request $request, string $id)
     {
         $student = Student::findOrFail($id);
@@ -101,17 +82,14 @@ class StudentController extends Controller
             'enrollment_date',
         ]));
 
-        return redirect()->route('student.index')
+        return redirect()->route('students.index')
             ->with('success', 'Student updated successfully.');
     }
 
-    // /**
-    //  * Remove the specified resource from storage.
-    //  */
     public function destroy(string $id)
     {
         Student::findOrFail($id)->delete();
-        return redirect()->route('student.index')
+        return redirect()->route('students.index')
             ->with('success', 'Student deleted successfully.');
     }
 }

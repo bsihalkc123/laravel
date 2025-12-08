@@ -7,11 +7,13 @@
     <!-- Header -->
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-3xl font-bold text-gray-800">📊 Results List</h2>
+        @role('admin|teacher')
 
         <a href="{{ route('results.create') }}"
            class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded shadow">
             + Add New Result
         </a>
+        @endrole
     </div>
 
     <!-- Success Message -->
@@ -75,6 +77,7 @@
                     </td>
 
                     <!-- Action Buttons -->
+                    @role('admin|teacher')
                     <td class="py-3 px-3 flex gap-2 justify-center">
                          <a href="{{ route('results.show', $result->id) }}" 
                             class="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 shadow transition">
@@ -97,7 +100,7 @@
                             </button>
                         </form>
                     </td>
-
+                    @endrole
                 </tr>
                 @empty
                 <tr>
