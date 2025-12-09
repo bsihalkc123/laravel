@@ -5,523 +5,271 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Asian College - Student Management System</title>
+  
+  <meta name="description" content="Asian College Student Management System - Ekantakuna, Kathmandu">
+  <meta name="keywords" content="college, student management, education, Nepal, Kathmandu">
+  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
   <style>
-    /* General Reset */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
+    /* BASE STYLES */
+    * { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
+    body { background: #f5f5f5; color:#333; line-height:1.6; scroll-behavior: smooth; }
+
+    /* NAVBAR */
+    nav { display:flex; justify-content:space-between; align-items:center; padding:15px 30px; background:linear-gradient(135deg,#004080,#0066cc); color:#fff; position:sticky; top:0; z-index:1000; flex-wrap:wrap; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    nav .logo-img { height:auto; width:auto; max-height:70px; object-fit:contain; }
+    .from-registration div { padding: 10px 20px; background: #ffcc00; border-radius:6px; transition:0.3s; min-width:100px; text-align:center; }
+    .from-registration div:hover { background:#e6b800; transform:translateY(-2px); }
+    .from-registration a { color:#004080; font-weight:600; text-decoration:none; display:flex; align-items:center; gap:8px; }
+
+    /* SLIDER */
+    .hero-slider { position: relative; width: 100%; max-height: 550px; overflow: hidden; }
+    .slide { display: none; height: 550px; }
+    .slide img { width: 100%; height: 100%; object-fit: cover; }
+    .slide.active { display: block; animation: fade 1s ease-in-out; }
+    @keyframes fade { from { opacity: 0.3; } to { opacity: 1; } }
+    .arrow { position:absolute; top:50%; transform:translateY(-50%); color:#ffcc00; font-size:2.5rem; cursor:pointer; padding:10px 15px; background: rgba(0,0,0,0.3); border-radius:50%; z-index:10; transition: all 0.3s ease; }
+    .arrow:hover { background: rgba(0,0,0,0.5); transform:translateY(-50%) scale(1.1); }
+    .prev { left:20px; }
+    .next { right:20px; }
+    .dots { position:absolute; bottom:20px; width:100%; text-align:center; }
+    .dot { height:14px; width:14px; background: rgba(255,255,255,0.5); border-radius:50%; display:inline-block; margin:0 8px; cursor:pointer; transition:all 0.3s ease; border:2px solid transparent; }
+    .dot:hover { background: rgba(255,255,255,0.8); }
+    .dot.active { background:#ffcc00; transform: scale(1.2); }
+
+    /* STATS */
+    .stats { display:flex; gap:30px; justify-content:center; padding:80px 20px; flex-wrap:wrap; }
+    .card { background: linear-gradient(135deg,#004080,#0066cc); color:#fff; width:300px; padding:35px 20px; border-radius:15px; text-align:center; box-shadow:0 8px 25px rgba(0,0,0,0.1); transition:all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .card:hover { transform: translateY(-8px) scale(1.02); box-shadow:0 15px 35px rgba(0,0,0,0.2); }
+    .card i { font-size:3.5em; margin-bottom:15px; }
+    .card h3 { font-size:1.8em; margin-bottom:10px; }
+    .card p { font-size:1.1em; opacity:0.9; }
+
+    /* FOOTER CONTACT FORM */
+    footer { background:#004080; color:white; padding:70px 20px; text-align:center; }
+    footer h3 { font-size:2.2em; margin-bottom:40px; color:#ffcc00; }
+    footer form { width:100%; max-width:500px; margin:0 auto 40px; background:white; padding:35px; border-radius:15px; color:#333; box-shadow:0 8px 25px rgba(0,0,0,0.15); }
+    footer label { display:block; text-align:left; margin:15px 0 5px; font-weight:600; color:#004080; }
+    footer input, footer textarea, footer select { width:100%; padding:14px; border-radius:8px; border:1px solid #ccc; margin-top:5px; outline:none; font-size:1em; transition:border 0.3s ease; }
+    footer input:focus, footer textarea:focus, footer select:focus { border:2px solid #0066cc; outline:none; }
+    footer input:invalid, footer select:invalid, footer textarea:invalid { border-color:#dc3545; }
+    footer button { background:linear-gradient(135deg,#ffcc00,#e6b800); border:none; padding:16px; width:100%; border-radius:8px; margin-top:20px; font-size:1.1em; color:#004080; cursor:pointer; transition: all 0.3s ease; font-weight:600; display:flex; align-items:center; justify-content:center; gap:10px; }
+    footer button:hover { transform:translateY(-2px); box-shadow:0 5px 15px rgba(255,204,0,0.3); }
+    footer button:active { transform:translateY(0); }
+    footer button:focus { outline:3px solid #004080; outline-offset:2px; }
+
+    /* MESSAGES */
+    .success-msg { background:#d4edda; color:#155724; padding:15px; border-radius:8px; margin-bottom:20px; border-left:4px solid #28a745; }
+    .error-msg { background:#f8d7da; color:#721c24; padding:10px; border-radius:4px; margin-top:5px; font-size:0.9em; border-left:4px solid #dc3545; }
+
+    /* ABOUT US */
+    .about-us { background:#f0f4f8; color:#333; padding:60px 20px; }
+    .about-us img { max-width:100%; height:auto; border-radius:15px; box-shadow:0 8px 20px rgba(0,0,0,0.1); }
+    .about-us h2 { font-size:2.2em; margin-bottom:20px; color:#004080; }
+    .about-us h3 { font-size:1.5em; margin-bottom:10px; color:#0066cc; }
+    .about-us h4 { font-size:1.5em; margin-top:20px; color:#0066cc; }
+    .about-us ul { list-style: disc; margin-left: 20px; line-height: 1.6; }
+
+    /* SOCIAL BUBBLES */
+    .social-bubble {
+      display:flex; align-items:center; justify-content:center;
+      width:50px; height:50px; background:#004080; color:#fff;
+      border-radius:50%; font-size:1.5em; transition: all 0.3s ease;
+      text-decoration:none; box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    }
+    .social-bubble:hover {
+      background:#ffcc00; color:#004080;
+      transform: scale(1.2) rotate(10deg);
+      box-shadow:0 6px 15px rgba(0,0,0,0.3);
     }
 
-    body {
-      line-height: 1.6;
-      background-color: #f5f5f5;
-      color: #333;
-      scroll-behavior: smooth;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* Navbar */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 30px;
-      background-color: #004080;
-      color: #fff;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-      flex-wrap: wrap;
-    }
-
-    nav .logo {
-      font-size: 1.7em;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    nav .contact-info {
-      display: flex;
-      gap: 25px;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-
-    nav .contact-info div {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 0.95em;
-    }
-
-    nav .social-icons a {
-      color: #fff;
-      margin-left: 10px;
-      font-size: 0.9em;
-      transition: 0.3s;
-      position: relative;
-    }
-
-    nav .social-icons a::after {
-      content: '';
-      position: absolute;
-      width: 0%;
-      height: 2px;
-      left: 0;
-      bottom: -2px;
-      background-color: #ffcc00;
-      transition: 0.3s;
-    }
-
-    nav .social-icons a:hover::after {
-      width: 100%;
-    }
-
-    .from-registration {
-      display: flex;
-      gap: 15px;
-    }
-
-    .from-registration div {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      cursor: pointer;
-      padding: 7px 18px;
-      border-radius: 6px;
-      transition: 0.3s;
-      background-color: #0066cc;
-      color: #fff;
-      font-size: 0.9em;
-    }
-
-    .from-registration div:hover {
-      background-color: #0052a3;
-    }
-
-    .from-registration div a {
-      color: #fff;
-    }
-
-    /* Navbar Logo Styling */
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo-img {
-      height: 100px;
-      width: auto;
-      object-fit: contain;
-      transition: 0.3s;
-    }
-
-    @media (max-width: 600px) {
-      .logo-img {
-        height: 50px;
-      }
-    }
-
-    /* Slider Section */
-    .hero-slider {
-      position: relative;
-      width: 100%;
-      max-height: 550px;
-      overflow: hidden;
-    }
-
-    .slides-container {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
-
-    .slide {
-      display: none;
-      width: 100%;
-      height: 550px;
-    }
-
-    .slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .slide.active {
-      display: block;
-      animation: fade 1s ease-in-out;
-    }
-
-    @keyframes fade {
-      from {
-        opacity: 0.4;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-
-    /* Arrows */
-    .arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 2em;
-      color: #ffcc00;
-      padding: 10px;
-      cursor: pointer;
-      z-index: 10;
-      user-select: none;
-    }
-
-    .prev {
-      left: 20px;
-    }
-
-    .next {
-      right: 20px;
-    }
-
-    .arrow:hover {
-      color: #fff;
-    }
-
-    /* Dots */
-    .dots {
-      text-align: center;
-      position: absolute;
-      bottom: 15px;
-      width: 100%;
-      z-index: 10;
-    }
-
-    .dot {
-      height: 12px;
-      width: 12px;
-      margin: 0 5px;
-      display: inline-block;
-      border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.5);
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .dot.active {
-      background-color: #ffcc00;
-    }
-
-    /* Statistics Cards */
-    .stats {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      padding: 80px 20px;
-      flex-wrap: wrap;
-      background-color: #f0f4f8;
-    }
-
-    .card {
-      background: linear-gradient(135deg, #004080, #0066cc);
-      flex: 1 1 250px;
-      max-width: 300px;
-      padding: 35px 20px;
-      border-radius: 15px;
-      text-align: center;
-      color: #fff;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-      transition: 0.5s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card i {
-      font-size: 3.5em;
-      margin-bottom: 15px;
-      transition: 0.3s;
-    }
-
-    .card h3 {
-      margin-bottom: 10px;
-      font-size: 1.5em;
-    }
-
-    .card p {
-      font-size: 1em;
-      color: #f0f0f0;
-    }
-
-    .card:hover {
-      transform: translateY(-8px) rotate(1deg);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Footer / Contact Form */
-    footer {
-      background-color: #004080;
-      color: #fff;
-      padding: 70px 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    footer h3 {
-      margin-bottom: 25px;
-      font-size: 2em;
-      font-weight: 600;
-    }
-
-    footer form {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      max-width: 500px;
-      gap: 20px;
-      background-color: #fff;
-      padding: 35px;
-      border-radius: 15px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-      color: #333;
-    }
-
-    footer .form-group {
-      position: relative;
-    }
-
-    footer input,
-    footer textarea,
-    footer select {
-      padding: 14px 15px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 1em;
-      width: 100%;
-      outline: none;
-      transition: 0.3s;
-    }
-
-    footer input:focus,
-    footer textarea:focus,
-    footer select:focus {
-      border-color: #004080;
-      box-shadow: 0 0 5px #ffcc00;
-    }
-
-    footer label {
-      position: absolute;
-      top: -8px;
-      left: 12px;
-      background-color: #fff;
-      padding: 0 5px;
-      font-size: 0.85em;
-      color: #004080;
-      font-weight: 500;
-    }
-
-    footer button {
-      padding: 14px;
-      border: none;
-      border-radius: 8px;
-      background: linear-gradient(135deg, #ffcc00, #e6b800);
-      color: #004080;
-      font-weight: bold;
-      font-size: 1em;
-      cursor: pointer;
-      transition: 0.4s;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    footer button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-    }
-
-    .success-msg {
-      background-color: #d4edda;
-      color: #155724;
-      padding: 12px;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      text-align: center;
-      font-weight: 500;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      nav {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      nav .contact-info {
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 10px;
-      }
-
-      .stats {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
+    /* RESPONSIVE */
+    @media (max-width: 768px) { nav { flex-direction: column; gap: 20px; } }
   </style>
 </head>
 
 <body>
-  <!-- Navbar -->
-  <nav>
-    <div class="logo">
-      <img src="{{ asset('logo.png') }}" alt="Asian College Logo" class="logo-img">
-    </div>
-    <div class="contact-info">
-      <div><i class="fas fa-map-marker-alt"></i> Ekantakuna Kathmandu, Nepal</div>
-      <div><i class="fas fa-phone"></i> 01-5912727</div>
-      <div class="social-icons">
-        <a href="https://www.facebook.com/achscollege"><i class="fab fa-facebook-f"></i> Facebook</a>
-        <a href="https://www.instagram.com/achscollege/"><i class="fab fa-instagram"></i> Instagram</a>
-        <a href="https://www.tiktok.com/@achscollege"><i class="fab fa-tiktok"></i> TikTok</a>
-      </div>
-      <div class="from-registration">
-        <div>
-          <a href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
-        </div>
-      </div>
-    </div>
-  </nav>
 
- <!-- Slider Section -->
-<section class="hero-slider">
-  <div class="slides-container">
-    <div class="slide active">
-      <img src="{{ asset('images/slider/graduation.jpg') }}" alt="Graduation">
-    </div>
-    <div class="slide">
-      <img src="{{ asset('images/slider/culturalfest.jpg') }}" alt="Cultural Festa">
-    </div>
-    <div class="slide">
-      <img src="{{ asset('images/slider/defenseproject.jpg') }}" alt="Defense Project">
-    </div>
-    <div class="slide">
-      <img src="{{ asset('images/slider/holi.jpg') }}" alt="Holi Celebration">
-    </div>
-    <div class="slide">
-      <img src="{{ asset('images/slider/orientation.jpg') }}" alt="Orientation">
-    </div>
-
-    <!-- Arrows -->
-    <div class="arrow prev">&#10094;</div>
-    <div class="arrow next">&#10095;</div>
-
-    <!-- Navigation Dots -->
-    <div class="dots">
-      <span class="dot active"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-    </div>
+ <!-- NAVBAR -->
+<nav aria-label="Main navigation">
+  <div class="logo">
+    <a href="{{ route('frontdashboard') }}" aria-label="Go to homepage">
+      <img src="{{ asset('images/college logo.webp') }}" class="logo-img" alt="Asian College Logo" loading="lazy">
+    </a>
   </div>
-</section>
 
+  <!-- NAVIGATION LINKS -->
+  <ul style="list-style:none; display:flex; gap:25px; align-items:center; flex-wrap:wrap; margin:0; padding:0;">
+    <li><a href="{{ route('frontdashboard') }}" style="color:yellow; text-decoration:none; font-weight:600;">Home</a></li>
+    <li><a href="" style="color:yellow; text-decoration:none; font-weight:600;">About Us</a></li>
+    <li><a href="" style="color:yellow; text-decoration:none; font-weight:600;">Program</a></li>
+    <li><a href="" style="color:yellow; text-decoration:none; font-weight:600;">News & Events</a></li>
+  </ul>
 
-  <!-- Statistics Cards -->
-  <section class="stats" id="stats">
-    <div class="card">
-      <i class="fas fa-user-graduate"></i>
-      <h3>Students</h3>
-      <p>1,250 enrolled students across all programs</p>
-    </div>
-    <div class="card">
-      <i class="fas fa-book"></i>
-      <h3>Courses</h3>
-      <p>45 academic courses covering multiple disciplines</p>
-    </div>
-    <div class="card">
-      <i class="fas fa-file-alt"></i>
-      <h3>Exams & Results</h3>
-      <p>100% exam tracking with instant result notifications</p>
-    </div>
-  </section>
+  <div class="from-registration">
+    <div><a href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a></div>
+  </div>
+</nav>
 
-  <!-- Footer / Contact Form -->
-  <footer>
+  <main id="main-content">
+
+    <!-- SLIDER -->
+    <section class="hero-slider" aria-label="Image carousel">
+      <div class="slide active"><img src="{{ asset('images/slider/graduation.jpg') }}" alt="Graduation ceremony" loading="lazy"></div>
+      <div class="slide"><img src="{{ asset('images/slider/culturalfest.jpg') }}" alt="Cultural festival" loading="lazy"></div>
+      <div class="slide"><img src="{{ asset('images/slider/defenseproject.jpg') }}" alt="Final year project defense" loading="lazy"></div>
+      <div class="slide"><img src="{{ asset('images/slider/holi.jpg') }}" alt="Holi celebration" loading="lazy"></div>
+      <div class="slide"><img src="{{ asset('images/slider/orientation.jpg') }}" alt="New student orientation" loading="lazy"></div>
+      <div class="arrow prev" tabindex="0" role="button">&#10094;</div>
+      <div class="arrow next" tabindex="0" role="button">&#10095;</div>
+      <div class="dots">
+        <span class="dot active" tabindex="0"></span>
+        <span class="dot" tabindex="0"></span>
+        <span class="dot" tabindex="0"></span>
+        <span class="dot" tabindex="0"></span>
+        <span class="dot" tabindex="0"></span>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats">
+      <div class="card"><i class="fas fa-user-graduate"></i><h3>Students</h3><p>1,250 enrolled students</p></div>
+      <div class="card"><i class="fas fa-book"></i><h3>Courses</h3><p>45 academic courses</p></div>
+      <div class="card"><i class="fas fa-file-alt"></i><h3>Exams & Results</h3><p>100% exam tracking</p></div>
+    </section>
+
+    <!-- CONTACT FORM -->
+    <footer>
+      <h3>Contact Us</h3>
+      @if(session('success'))
+        <div class="success-msg"><i class="fas fa-check-circle"></i> {{ session('success') }}</div>
+      @endif
+      @if($errors->any())
+        <div class="error-msg"><i class="fas fa-exclamation-circle"></i>
+          @foreach($errors->all() as $error)<div>{{ $error }}</div>@endforeach
+        </div>
+      @endif
+<footer>
     <h3>Contact Us</h3>
 
+    {{-- Success message --}}
     @if(session('success'))
-    <div class="success-msg">
-      {{ session('success') }}
-    </div>
+        <div class="success-msg">
+            <i class="fas fa-check-circle"></i> {{ session('success') }}
+        </div>
     @endif
 
-    <form action="{{ route('contactus.store') }}" method="POST">
-      @csrf
-      <div class="form-group">
-        <label>Name</label>
-        <input type="text" name="full_name" placeholder="Your Name" required maxlength="255">
-      </div>
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" name="email" placeholder="Your Email" required maxlength="255">
-      </div>
-      <div class="form-group">
-        <label>Request Type</label>
-        <select name="request_type" required>
-          <option value="" disabled selected>Select your request</option>
-          <option value="general">General</option>
-          <option value="technical">Technical</option>
-          <option value="payment">Payment</option>
-          <option value="feedback">Feedback</option>
+    {{-- Validation errors --}}
+    @if($errors->any())
+        <div class="error-msg">
+            <i class="fas fa-exclamation-circle"></i>
+            @foreach($errors->all() as $error)
+                <div>{{ $error }}</div>
+            @endforeach
+        </div>
+    @endif
+
+    {{-- Contact form --}}
+    <form method="POST" action="{{ route('contactus.store') }}" enctype="multipart/form-data">
+        @csrf
+        {{-- Honeypot for spam --}}
+        <input type="text" name="honeypot" style="display:none;" tabindex="-1" autocomplete="off">
+
+        <label for="full_name">Name *</label>
+        <input type="text" id="full_name" name="full_name" required minlength="2" maxlength="100"
+               value="{{ old('full_name') }}">
+
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" required value="{{ old('email') }}">
+
+        <label for="request_type">Request Type *</label>
+        <select id="request_type" name="request_type" required>
+            <option value="" disabled {{ old('request_type') ? '' : 'selected' }}>Select a request type</option>
+            <option value="general" {{ old('request_type')=='general'?'selected':'' }}>General Inquiry</option>
+            <option value="technical" {{ old('request_type')=='technical'?'selected':'' }}>Technical Support</option>
+            <option value="payment" {{ old('request_type')=='payment'?'selected':'' }}>Payment Issue</option>
+            <option value="feedback" {{ old('request_type')=='feedback'?'selected':'' }}>Feedback/Suggestion</option>
+            <option value="admission" {{ old('request_type')=='admission'?'selected':'' }}>Admission Query</option>
         </select>
-      </div>
-      <div class="form-group">
-        <label>Message</label>
-        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-      </div>
-      <button type="submit"><i class="fas fa-paper-plane"></i> Send Message</button>
+
+        <label for="message">Message *</label>
+        <textarea id="message" name="message" rows="5" required minlength="10" maxlength="500">{{ old('message') }}</textarea>
+        <div style="text-align:right; font-size:0.9em; color:#666; margin-top:5px;">
+            <span id="charCount">500 characters remaining</span>
+        </div>
+
+        {{-- File attachment --}}
+        <label for="attachment">Attach File (optional)</label>
+        <input type="file" id="attachment" name="attachment" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx">
+
+        <button type="submit"><i class="fas fa-paper-plane"></i> Send Message</button>
+        <small style="display:block; margin-top:10px; color:#444;">* Required fields</small>
     </form>
-  </footer>
 
-  <!-- Slider JS -->
+</footer>
+
+    <!-- ABOUT US -->
+    <section class="about-us" aria-labelledby="aboutus-heading">
+      <div style="max-width:1200px; margin:0 auto; display:flex; flex-wrap:wrap; gap:40px; align-items:flex-start; justify-content:center;">
+        <div style="flex:1 1 300px; text-align:center;">
+          <img src="{{ asset('images/college logo.webp') }}" alt="Asian College campus view" loading="lazy">
+        </div>
+        <div style="flex:1 1 400px;">
+          <h2 id="aboutus-heading">About Asian College</h2>
+          <p>Asian College has been a hub of quality education and innovation for students seeking to excel academically and personally. Our college fosters an environment where learning goes beyond the classroom, preparing students for leadership, research, and career opportunities.</p>
+          <h3>Programs</h3>
+          <ul>
+            <li>Bachelor of Science in Computer Science</li>
+            <li>Bachelor of Business Administration</li>
+            <li>Master of Business Administration</li>
+            <li>Diploma in Information Technology</li>
+            <li>Certificate Courses in Various IT and Business Skills</li>
+          <h3>Mission</h3>
+          <p>To provide quality education, innovative learning experiences, and opportunities for personal growth to empower our students to become responsible global citizens.</p>
+          <h3>Key Highlights</h3>
+          <ul>
+            <li>Experienced and qualified faculty members</li>
+            <li>State-of-the-art labs and learning facilities</li>
+            <li>Diverse academic programs and courses</li>
+            <li>Active cultural, sports, and co-curricular activities</li>
+            <li>Strong placement and career guidance support</li>
+          </ul>
+          <h4 id="location">Location</h4>
+          <p>Ekantakuna, Kathmandu, Nepal</p>
+          <div class="social-icons" style="margin-top:20px; display:flex; gap:15px;">
+            <a href="https://www.facebook.com/achscollege" target="_blank" class="social-bubble"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/achscollege/" target="_blank" class="social-bubble"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@achscollege" target="_blank" class="social-bubble"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
   <script>
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
-
-    function showSlide(index) {
-      if (index >= slides.length) currentSlide = 0;
-      else if (index < 0) currentSlide = slides.length - 1;
-      else currentSlide = index;
-
-      slides.forEach((slide, i) => {
-        slide.classList.toggle('active', i === currentSlide);
-        dots[i].classList.toggle('active', i === currentSlide);
-      });
-    }
-
-    document.querySelector('.next').addEventListener('click', () => showSlide(currentSlide + 1));
-    document.querySelector('.prev').addEventListener('click', () => showSlide(currentSlide - 1));
-
-    dots.forEach((dot, i) => {
-      dot.addEventListener('click', () => showSlide(i));
+    // CHARACTER COUNT
+    const textarea = document.getElementById('message');
+    const charCount = document.getElementById('charCount');
+    textarea.addEventListener('input', () => {
+      const remaining = 500 - textarea.value.length;
+      charCount.textContent = remaining + ' characters remaining';
     });
 
-    setInterval(() => showSlide(currentSlide + 1), 5000);
+    // SLIDER
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    const showSlide = n => { slides.forEach((s,i)=>s.classList.toggle('active',i===n)); dots.forEach((d,i)=>d.classList.toggle('active',i===n)); };
+    const nextSlide = () => { slideIndex = (slideIndex+1)%slides.length; showSlide(slideIndex); };
+    const prevSlide = () => { slideIndex = (slideIndex-1+slides.length)%slides.length; showSlide(slideIndex); };
+    document.querySelector('.next').addEventListener('click', nextSlide);
+    document.querySelector('.prev').addEventListener('click', prevSlide);
+    dots.forEach((dot,i)=>dot.addEventListener('click',()=>{slideIndex=i; showSlide(i);}));
+    setInterval(nextSlide, 7000);
   </script>
-</body>
 
+</body>
 </html>

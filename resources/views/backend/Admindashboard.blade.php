@@ -25,8 +25,8 @@
     <div class="sidebar bg-white w-64 shadow-md">
         <div class="p-6 border-b border-gray-200">
             <div class="flex items-center">
-                <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-                    <i class="fas fa-graduation-cap text-white"></i>
+                <div class="w-auto h-12 flex items-center justify-center">
+                    <img src="{{ asset('images/college logo.webp') }}" alt="Logo" class="h-full object-contain">
                 </div>
                 <h1 class="text-xl font-bold text-gray-800 ml-3">Asian College Of Higher Studies</h1>
             </div>
@@ -99,23 +99,23 @@
 
     <!-- Main Content -->
     <div class="flex-1 overflow-auto">
-        <header class="bg-white shadow-sm py-4 px-6 flex justify-between items-center">
+        <header class="bg-[linear-gradient(135deg,#004080,#0066cc)] shadow-sm py-4 px-6 flex justify-between items-center text-white">
             <div>
-                <h2 class="text-xl font-semibold text-gray-800">Dashboard</h2>
-                <p class="text-sm text-gray-500">Welcome to your student management dashboard</p>
+                <h2 class="text-xl font-semibold text-white">Dashboard</h2>
+                <p class="text-sm text-blue-100">Welcome to your student management dashboard</p>
             </div>
             <div class="flex items-center space-x-4">
                 <div class="relative">
-                    <button class="p-2 rounded-full hover:bg-gray-100">
-                        <i class="fas fa-bell text-gray-600"></i>
+                    <button class="p-2 rounded-full hover:bg-white/10 transition-colors">
+                        <i class="fas fa-bell text-white"></i>
                         <span class="notification-dot absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
                     </button>
                 </div>
                 <div class="flex items-center">
-                    <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-medium">
+                    <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-blue-800 font-bold shadow-sm">
                         {{ auth()->user()->initials ?? 'BK' }}
                     </div>
-                    <span class="ml-2 text-gray-700 font-medium">{{ auth()->user()->name }}</span>
+                    <span class="ml-2 text-white font-medium">{{ auth()->user()->name }}</span>
                 </div>
             </div>
         </header>

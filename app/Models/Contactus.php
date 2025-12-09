@@ -16,5 +16,6 @@ class Contactus extends Model
         'email',
         'request_type',   //  Added
         'message',
+        'attachment'      //  Added
     ];
 }
