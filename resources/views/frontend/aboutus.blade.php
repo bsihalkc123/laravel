@@ -1,93 +1,183 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us - Asian College</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+@extends('frontend.app')
 
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
-    body { background:#f5f5f5; color:#333; line-height:1.6; }
-    nav { display:flex; justify-content:space-between; align-items:center; padding:15px 30px; background:linear-gradient(135deg,#004080,#0066cc); color:#fff; flex-wrap:wrap; box-shadow:0 4px 15px rgba(0,0,0,0.1); position:sticky; top:0; z-index:1000; }
-    nav .logo-img { max-height:70px; object-fit:contain; }
-    nav ul { list-style:none; display:flex; gap:25px; align-items:center; flex-wrap:wrap; margin:0; padding:0; }
-    nav ul li a { color:#fff; text-decoration:none; font-weight:600; transition:0.3s; padding:8px 10px; border-radius:5px; }
-    nav ul li a:hover { background:#ffcc00; color:#004080; }
-    .from-registration div a { color:#004080; font-weight:600; text-decoration:none; background:#ffcc00; padding:8px 15px; border-radius:6px; transition:0.3s; display:flex; align-items:center; gap:8px; }
-    .from-registration div a:hover { background:#e6b800; }
-    
-    .about-us { background:#f0f4f8; color:#333; padding:60px 20px; }
-    .about-us img { max-width:100%; height:auto; border-radius:15px; box-shadow:0 8px 20px rgba(0,0,0,0.1); }
-    .about-us h2 { font-size:2.2em; margin-bottom:20px; color:#004080; }
-    .about-us h3 { font-size:1.5em; margin-bottom:10px; color:#0066cc; }
-    .about-us p { margin-bottom:15px; }
-    .about-us ul { list-style:disc; margin-left:20px; line-height:1.6; }
-    .social-icons a { display:inline-flex; justify-content:center; align-items:center; width:45px; height:45px; border-radius:50%; background:#004080; color:#fff; margin-right:15px; transition:all 0.3s; font-size:1.2em; }
-    .social-icons a:hover { background:#ffcc00; color:#004080; transform:scale(1.1); }
+@section('title', 'About Us')
 
-    @media (max-width:768px) { 
-      nav { flex-direction:column; gap:20px; } 
-      .about-us div { flex:1 1 100% !important; text-align:center; } 
-    }
-  </style>
-</head>
-<body>
+@push('styles')
+<style>
+/* SLIDER */
+.slider {
+    width: 100%;
+    height: 500px; /* adjust height as needed */
+    overflow: hidden;
+    position: relative;
+}
 
-  <!-- NAVBAR -->
-  <nav>
-    <div class="logo">
-      <a href="{{ route('frontdashboard') }}">
-        <img src="{{ asset('images/college logo.webp') }}" class="logo-img" alt="Asian College Logo">
-      </a>
+.slides {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.7s ease-in-out;
+}
+
+.slides img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* ABOUT US SECTIONS */
+.about-us { padding: 60px 20px; background:#f0f4f8; }
+.section-block {
+    max-width: 1200px;
+    margin: 0 auto 60px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: center;
+}
+.section-block img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.1);
+}
+.section-text { flex: 1 1 500px; }
+.section-text h2 { font-size:2em; margin-bottom:15px; color:#004080; }
+.section-text p, .section-text ul { margin-bottom:15px; }
+.section-text ul { list-style: disc; margin-left:20px; line-height:1.6; }
+
+.social-icons a {
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    width:45px; height:45px;
+    border-radius:50%;
+    background:#004080;
+    color:#fff;
+    margin-right:15px;
+    font-size:1.2em;
+    transition: all 0.3s;
+}
+.social-icons a:hover {
+    background:#ffcc00;
+    color:#004080;
+    transform: scale(1.1);
+}
+
+/* Responsive */
+@media(max-width:768px){
+    .section-block { flex-direction: column; text-align:center; }
+    .section-block img, .section-text { flex:1 1 100%; }
+}
+</style>
+@endpush
+
+@section('content')
+
+<!-- SLIDER -->
+<div class="slider">
+    <div class="slides">
+        <img src="{{ asset('images/slider/aboutsus1.jpg') }}" alt="Campus Slide 1">
+        <img src="{{ asset('images/slider/aboutsus2.jpg') }}" alt="Campus Slide 2">
+        <img src="{{ asset('images/slider/aboutsus3.jpg') }}" alt="Campus Slide 3">
     </div>
+</div>
 
-    <ul>
-      <li><a href="{{ route('frontdashboard') }}">Home</a></li>
-      <li><a href="#aboutus-heading">About Us</a></li>
-      <li><a href="{{ route('programs') }}">Program</a></li>
-      <li><a href="{{ route('news') }}">News & Events</a></li>
-    </ul>
-
-    <div class="from-registration">
-      <div><a href="{{ route('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a></div>
-    </div>
-  </nav>
-
-  <!-- ABOUT US SECTION -->
-  <section class="about-us" id="aboutus-heading">
-    <div style="max-width:1200px; margin:0 auto; display:flex; flex-wrap:wrap; gap:40px; align-items:flex-start; justify-content:center;">
-      <div style="flex:1 1 300px; text-align:center;">
-        <img src="{{ asset('images/college logo.webp') }}" alt="Asian College campus view">
-      </div>
-      <div style="flex:1 1 500px;">
-        <h2>About Asian College</h2>
-        <p>Asian College has been a hub of quality education and innovation for students seeking to excel academically and personally. Our college fosters an environment where learning goes beyond the classroom, preparing students for leadership, research, and career opportunities.</p>
-        
-        <h3>Vision</h3>
-        <p>To be a premier educational institution recognized for excellence in academic achievement, research, and holistic student development.</p>
-        
-        <h3>Mission</h3>
-        <p>To provide quality education, innovative learning experiences, and opportunities for personal growth to empower our students to become responsible global citizens.</p>
-        
-        <h3>Key Highlights</h3>
-        <ul>
-          <li>Experienced and qualified faculty members</li>
-          <li>State-of-the-art labs and learning facilities</li>
-          <li>Diverse academic programs and courses</li>
-          <li>Active cultural, sports, and co-curricular activities</li>
-          <li>Strong placement and career guidance support</li>
-        </ul>
-
-        <div class="social-icons" style="margin-top:20px;">
-          <a href="https://www.facebook.com/achscollege" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
-          <a href="https://www.instagram.com/achscollege/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.tiktok.com/@achscollege" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+<!-- ABOUT US SECTIONS -->
+<section class="about-us">
+       <!-- Mission -->
+    <div class="section-block">
+        <div>
+            <img src="{{ asset('images/mission.png') }}" alt="Mission Image">
         </div>
-      </div>
+        <div class="section-text">
+            <h2 style="color: burlywood">Our Mission</h2>
+            <p>
+                The mission of the ACHS Education Foundation is to develop citizens of integrity with the managerial expertise,
+                vision, pragmatism, and ethical sensibility to succeed professionally and personally, both independently and collaboratively.
+                Additionally, we intend to prepare leaders to face the challenges of a dynamic and diverse world, grounded in our ideals
+                of excellence in education, the importance of community, and a commitment to service.
+            </p>
+        </div>
     </div>
-  </section>
 
-</body>
-</html>
+
+ <!-- Vision -->
+    <div class="section-block" style="flex-direction: row-reverse;">
+        <div><img src="{{ asset('images/vision.png') }}" alt="Vision Image"></div>
+        <div class="section-text">
+            <h2 style="color: burlywood">Our Vision</h2>
+            <p>
+                To be an innovative global leader in imparting competitive, quality education by transforming lives that will
+                change the world for the better, at whatever level of human endeavor they are involved in.
+            </p>
+        </div>
+    </div>
+
+    <div class="section-block">
+        <div><img src="{{ asset('images/objective.png') }}" alt="Objectives Image"></div>
+        <div class="section-text">
+            <h2 style="color: burlywood">Our Objectives</h2>
+            <ul>
+                <li>Provide high-quality education in various disciplines.</li>
+                <li>Encourage innovation, research, and critical thinking.</li>
+                <li>Promote ethical, social, and cultural values.</li>
+                <li>Foster leadership and personal development in students.</li>
+                <li>Strengthen community engagement and global awareness.</li>
+            </ul>
+        </div>
+    </div>
+
+      <!-- Chairman Message -->
+    <div class="section-block" style="flex-direction: row-reverse;">
+        <div><img src="{{ asset('images/chairman.png') }}" alt="Chairman Image"></div>
+        <div class="section-text">
+            <h2 style="color: burlywood">Message from the Chairman</h2>
+            <p>
+                Welcome to the Asian College of Higher Studies (ACHS), an innovative learning center.
+                As Chairman, I'm delighted and grateful to be part of ACHS. Here, you're not just an individual;
+                you're part of a supportive family that stands by you through every joy and challenge.
+                ACHS offers more than IT and Management studies. Students engage in Guest Lectures, Workshops, Seminars,
+                and Co-curricular activities for holistic growth. Our scientific approach, from infrastructure to teaching methods,
+                shapes students into market-ready professionals. Ethics and morality are vital in today's world. ACHS emphasizes these values,
+                fostering better individuals and professionals who catalyze positive societal and national change.
+                ACHS is dedicated to its goals. With experienced faculty and committed management, we're reaching new heights.
+                Join us in our innovative journey to transform our nation.
+            </p>
+            <p><strong>Mr Dinesh Chandra Nakarmi - Chairman, Asian College</strong></p>
+        </div>
+    </div>
+
+    <div class="section-block" style="justify-content:center; margin-top:20px;">
+        <div class="social-icons">
+            <a href="https://www.facebook.com/achscollege" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/achscollege/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@achscollege" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
+    </div>
+</section>
+
+@push('scripts')
+<script>
+const slides = document.querySelector('.slides');
+const images = document.querySelectorAll('.slides img');
+let index = 0;
+
+function nextSlide() {
+    index++;
+    if(index >= images.length) index = 0;
+    slides.style.transform = `translateX(-${index * 100}vw)`;
+    slides.style.transition = 'transform 0.7s ease-in-out';
+}
+
+setInterval(nextSlide, 4000);
+
+window.addEventListener('resize', () => {
+    slides.style.transition = 'none';
+    slides.style.transform = `translateX(-${index * 100}vw)`;
+});
+</script>
+@endpush
+
+@endsection

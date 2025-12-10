@@ -17,7 +17,16 @@ use App\Http\Controllers\ContactUsController;
 // -----------------------
 Route::get('/', [ContactUsController::class, 'create'])->name('frontdashboard');
 Route::post('/contactus', [ContactUsController::class, 'store'])->name('contactus.store');
-// Route::get('/about-us', function () {return view('aboutus'); })->name('aboutus');
+Route::get('/about-us', function () {
+    return view('frontend.aboutus');
+})->name('aboutus');
+Route::get('/programs', function () {
+    return view('frontend.program');
+})->name('programs');
+Route::get('/news-and-events', function () {
+    return view('frontend.newsandevents');
+})->name('newsandevents');
+
 
 // -----------------------
 // AUTHENTICATION

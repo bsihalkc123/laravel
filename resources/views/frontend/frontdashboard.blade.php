@@ -103,9 +103,9 @@
   <!-- NAVIGATION LINKS -->
   <ul style="list-style:none; display:flex; gap:25px; align-items:center; flex-wrap:wrap; margin:0; padding:0;">
     <li><a href="{{ route('frontdashboard') }}" style="color:yellow; text-decoration:none; font-weight:600;">Home</a></li>
-    <li><a href="" style="color:yellow; text-decoration:none; font-weight:600;">About Us</a></li>
-    <li><a href="" style="color:yellow; text-decoration:none; font-weight:600;">Program</a></li>
-    <li><a href="" style="color:yellow; text-decoration:none; font-weight:600;">News & Events</a></li>
+    <li><a href="{{ route('aboutus') }}" style="color:yellow; text-decoration:none; font-weight:600;">About Us</a></li>
+    <li><a href="{{ route('programs') }}" style="color:yellow; text-decoration:none; font-weight:600;">Program</a></li>
+    <li><a href="{{ route('newsandevents') }}" style="color:yellow; text-decoration:none; font-weight:600;">News & Events</a></li>
   </ul>
 
   <div class="from-registration">
@@ -152,7 +152,7 @@
         </div>
       @endif
 <footer>
-    <h3>Contact Us</h3>
+
 
     {{-- Success message --}}
     @if(session('success'))
@@ -215,29 +215,35 @@
       <div style="max-width:1200px; margin:0 auto; display:flex; flex-wrap:wrap; gap:40px; align-items:flex-start; justify-content:center;">
         <div style="flex:1 1 300px; text-align:center;">
           <img src="{{ asset('images/college logo.webp') }}" alt="Asian College campus view" loading="lazy">
+          <span style="display:block; margin-top:10px; font-size:24px; font-weight:700;">
+           Asian College of Higher Studies
+          </span>
         </div>
         <div style="flex:1 1 400px;">
           <h2 id="aboutus-heading">About Asian College</h2>
-          <p>Asian College has been a hub of quality education and innovation for students seeking to excel academically and personally. Our college fosters an environment where learning goes beyond the classroom, preparing students for leadership, research, and career opportunities.</p>
           <h3>Programs</h3>
           <ul>
-            <li>Bachelor of Science in Computer Science</li>
-            <li>Bachelor of Business Administration</li>
-            <li>Master of Business Administration</li>
-            <li>Diploma in Information Technology</li>
-            <li>Certificate Courses in Various IT and Business Skills</li>
-          <h3>Mission</h3>
-          <p>To provide quality education, innovative learning experiences, and opportunities for personal growth to empower our students to become responsible global citizens.</p>
-          <h3>Key Highlights</h3>
-          <ul>
-            <li>Experienced and qualified faculty members</li>
-            <li>State-of-the-art labs and learning facilities</li>
-            <li>Diverse academic programs and courses</li>
-            <li>Active cultural, sports, and co-curricular activities</li>
-            <li>Strong placement and career guidance support</li>
+            <li><a href="/programs/Bachelor of science in computer science and information technology" style="color:#cc0000">BSC.CSIT</a></li>
+            <li><a href="/programs/Bachelor of computer applications" style="color:#cc0000">BCA</a></li>
+            <li><a href="/programs/Bachelor of business Management" style="color:#cc0000">BBM</a></li>
+            <li><a href="/programs/Bachelor of science in business studies" style="color:#cc0000">BBS</a></li>
           </ul>
-          <h4 id="location">Location</h4>
-          <p>Ekantakuna, Kathmandu, Nepal</p>
+          <h3>Quick Links</h3>
+          <ul>
+          <li><a href="/aboutus" style="color:#cc0000">About</a></li>
+          <li><a href="/news&events" style="color:#cc0000">News & Events</a></li>
+          <li><a href="/program" style="color:#cc0000">Programs</a></li>
+          </ul>
+          <h3>Contact Info</h3>
+        <ul style="list-style:none; padding:0; margin:0; line-height:1.8;">
+        <li><strong>Email:</strong> <span style="color:#cc0000;">info@achs.edu.np</span></li>
+        <li><strong>Phone:</strong> <span style="color:#cc0000;">01-5912727</span></li>
+        <li><strong>Mobile:</strong> <span style="color:#cc0000;">+977-9765341484</span></li>
+        </ul>
+
+          <h4 id="location" style="margin-top:20px; color:#0066cc; font-weight:700;">Location</h4>
+          <p style="color:#444;">Ekantakuna, Kathmandu, Nepal</p>
+
           <div class="social-icons" style="margin-top:20px; display:flex; gap:15px;">
             <a href="https://www.facebook.com/achscollege" target="_blank" class="social-bubble"><i class="fab fa-facebook"></i></a>
             <a href="https://www.instagram.com/achscollege/" target="_blank" class="social-bubble"><i class="fab fa-instagram"></i></a>
