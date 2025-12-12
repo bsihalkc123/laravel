@@ -11,22 +11,30 @@ use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\ProgramController;
 
 // -----------------------
 // FRONTEND (Home page)
 // -----------------------
 Route::get('/', [ContactUsController::class, 'create'])->name('frontdashboard');
 Route::post('/contactus', [ContactUsController::class, 'store'])->name('contactus.store');
+
 Route::get('/about-us', function () {
     return view('frontend.aboutus');
 })->name('aboutus');
-Route::get('/programs', function () {
-    return view('frontend.program');
-})->name('programs');
+
 Route::get('/news-and-events', function () {
     return view('frontend.newsandevents');
 })->name('newsandevents');
 
+// Programs page
+Route::get('/programs', [ProgramController::class, 'index'])->name('programs');
+
+// Individual programs
+Route::get('/programs/bca', [ProgramController::class, 'bca'])->name('programs.bca');
+Route::get('/programs/csit', [ProgramController::class, 'csit'])->name('programs.csit');
+Route::get('/programs/bbs', [ProgramController::class, 'bbs'])->name('programs.bbs');
+Route::get('/programs/bbm', [ProgramController::class, 'bbm'])->name('programs.bbm');
 
 // -----------------------
 // AUTHENTICATION
@@ -34,6 +42,7 @@ Route::get('/news-and-events', function () {
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'Submitlogin'])->name('login.submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
 Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
 
@@ -68,19 +77,16 @@ Route::middleware(['auth','role_or_permission:admin|teacher'])->group(function (
 
 // Teacher-only routes
 Route::middleware(['auth','role:teacher'])->group(function () {
-    Route::resource('exams', ExamController::class)
-        ->middleware('permission:manage exams');
     Route::resource('results', ResultController::class)
         ->middleware('permission:manage results');
     Route::resource('enrollments', EnrollmentController::class)
         ->middleware('permission:manage enrollments');
 });
 
-// Students (and admins) can only view students
+// Students (and admins/teachers) can only view students
 Route::middleware(['auth', 'role:student|admin|teacher'])->group(function () {
     Route::resource('students', StudentController::class)
         ->only(['index', 'show']);
-    Route::middleware([]); 
     Route::resource('teachers', TeacherController::class)
         ->only(['index', 'show']);  
     Route::resource('courses', CourseController::class)
@@ -93,7 +99,6 @@ Route::middleware(['auth', 'role:student|admin|teacher'])->group(function () {
         ->only(['index', 'show']);
 });
 
-
 // -----------------------
 // ADMIN CONTACT MESSAGES
 // -----------------------
@@ -101,13 +106,16 @@ Route::prefix('admin')->middleware(['auth','role:admin'])->group(function () {
     Route::get('/contactus', [ContactUsController::class, 'index'])
         ->name('contactus.index')
         ->middleware('permission:view contact messages');
+
     Route::get('/contactus/{id}/edit', [ContactUsController::class, 'edit'])
         ->name('contactus.edit')
         ->middleware('permission:edit contact messages');
+
     Route::put('/contactus/{id}', [ContactUsController::class, 'update'])
         ->name('contactus.update')
         ->middleware('permission:edit contact messages');
+
     Route::delete('/contactus/{id}', [ContactUsController::class, 'destroy'])
         ->name('contactus.destroy')
         ->middleware('permission:delete contact messages');
-});  
+});

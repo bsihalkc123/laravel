@@ -218,21 +218,31 @@
           <span style="display:block; margin-top:10px; font-size:24px; font-weight:700;">
            Asian College of Higher Studies
           </span>
+          <!-- Partners Section -->
+  <h3 style="margin-top:30px; color:#004080;">Our Accreditation & Partners</h3>
+  <p style="color:#444; max-width:280px; margin:10px auto 20px auto; font-size:0.95em;">
+    ACHS College, a leading IT and business college in Nepal, is accredited by top educational bodies.
+  </p>
+  <div style="display:flex; flex-wrap:wrap; gap:15px; justify-content:center; align-items:center;">
+    <img src="{{ asset('images/Ekbana.png') }}" alt="EKbana" style="height:50px; object-fit:contain;">
+    <img src="{{ asset('images/cloudhimalaya.png') }}" alt="Cloud Himalaya" style="height:50px; object-fit:contain;">
+    <img src="{{ asset('images/inficare.png') }}" alt="Inficare" style="height:50px; object-fit:contain;">
+  </div>
         </div>
         <div style="flex:1 1 400px;">
           <h2 id="aboutus-heading">About Asian College</h2>
           <h3>Programs</h3>
           <ul>
-            <li><a href="/programs/Bachelor of science in computer science and information technology" style="color:#cc0000">BSC.CSIT</a></li>
-            <li><a href="/programs/Bachelor of computer applications" style="color:#cc0000">BCA</a></li>
-            <li><a href="/programs/Bachelor of business Management" style="color:#cc0000">BBM</a></li>
-            <li><a href="/programs/Bachelor of science in business studies" style="color:#cc0000">BBS</a></li>
+            <li><a href="{{ route('programs.csit') }}" style="color:#cc0000">BSC.CSIT</a></li>
+            <li><a href="{{ route('programs.bca') }}" style="color:#cc0000">BCA</a></li>
+            <li><a href="{{ route('programs.bbm') }}" style="color:#cc0000">BBM</a></li>
+            <li><a href="{{ route('programs.bbs') }}" style="color:#cc0000">BBS</a></li>
           </ul>
           <h3>Quick Links</h3>
           <ul>
-          <li><a href="/aboutus" style="color:#cc0000">About</a></li>
-          <li><a href="/news&events" style="color:#cc0000">News & Events</a></li>
-          <li><a href="/program" style="color:#cc0000">Programs</a></li>
+          <li><a href="{{ route('aboutus') }}" style="color:#cc0000">About</a></li>
+          <li><a href="{{ route('newsandevents') }}" style="color:#cc0000">News & Events</a></li>
+          <li><a href="{{ route('programs') }}" style="color:#cc0000">Programs</a></li>
           </ul>
           <h3>Contact Info</h3>
         <ul style="list-style:none; padding:0; margin:0; line-height:1.8;">
