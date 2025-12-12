@@ -24,9 +24,9 @@
             'date' => 'March 15, 2023',
             'description' => 'Welcoming our new batch of students with an exciting orientation program.',
             'images' => [
-                '/images/orientation1.jpg',
-                '/images/orientation2.jpg',
-                '/images/orientation3.jpg',
+                '/images/newsandevents/orientation1.png',
+                '/images/newsandevents/orientation2.png',
+                '/images/newsandevents/orientation3.png',
             ]
         ],
         [
@@ -34,9 +34,9 @@
             'date' => 'May 5, 2023',
             'description' => 'Celebrating diversity with music, dance, and art performances.',
             'images' => [
-                '/images/cultural1.jpg',
-                '/images/cultural2.jpg',
-                '/images/cultural3.jpg',
+                '/images/newsandevents/cultural1.png',
+                '/images/newsandevents/cultural2.png',
+                '/images/newsandevents/cultural3.png',
             ]
         ],
         [
@@ -44,9 +44,10 @@
             'date' => 'September 10, 2023',
             'description' => 'Innovative tech competitions and workshops for tech enthusiasts.',
             'images' => [
-                '/images/tech1.jpg',
-                '/images/tech2.jpg',
-                '/images/tech3.jpg',
+                '/images/newsandevents/fest1.png',
+                '/images/newsandevents/fest2.png',
+                '/images/newsandevents/fest3.png',
+                '/images/newsandevents/fest4.png',
             ]
         ],
         [
@@ -54,11 +55,11 @@
             'date' => 'November 20, 2023',
             'description' => 'A day filled with fun and competitive sports activities.',
             'images' => [
-                '/images/sports1.jpg',
-                '/images/sports2.jpg',
-                '/images/sports3.jpg',
+                '/images/newsandevents/sports1.png',
+                '/images/newsandevents/sports2.png',
+                '/images/newsandevents/sports3.png',
             ]
-        ],
+        ],  
     ];
     @endphp
 
@@ -130,10 +131,10 @@
 
     @php
     $students = [
-        ['name' => 'Riya Sharma', 'course' => 'BSc CSIT, 3rd Year', 'quote' => 'ACHS has provided me with countless opportunities to grow both academically and personally. The faculty is extremely supportive and the campus environment is very conducive to learning.', 'image' => '/images/students/riya.jpg'],
-        ['name' => 'Amit Gurung', 'course' => 'BBM, 2nd Year', 'quote' => 'The practical approach to learning at ACHS has helped me understand business concepts better. The industry visits and guest lectures are particularly valuable.', 'image' => '/images/students/amit.jpg'],
-        ['name' => 'Sneha Thapa', 'course' => 'BCA, Final Year', 'quote' => 'I’ve had the chance to work on real-world projects and participate in hackathons that have boosted my confidence and technical skills significantly.', 'image' => '/images/students/sneha.jpg'],
-        ['name' => 'Rajiv Shrestha', 'course' => 'BBS, Alumni', 'quote' => 'The holistic education I received at ACHS prepared me well for my professional career. The soft skills training was as valuable as the academic curriculum.', 'image' => '/images/students/rajiv.jpg'],
+        ['name' => 'parsiddhi Acharya', 'course' => 'BSc CSIT, 3rd Year', 'quote' => 'ACHS has provided me with countless opportunities to grow both academically and personally. The faculty is extremely supportive and the campus environment is very conducive to learning.', 'image' => '/images/students/parsiddhi.png'],
+        ['name' => 'Amit Gurung', 'course' => 'BBM, 2nd Year', 'quote' => 'The practical approach to learning at ACHS has helped me understand business concepts better. The industry visits and guest lectures are particularly valuable.', 'image' => '/images/students/amit.png'],
+        ['name' => 'Sneha Thapa', 'course' => 'BCA, Final Year', 'quote' => 'I’ve had the chance to work on real-world projects and participate in hackathons that have boosted my confidence and technical skills significantly.', 'image' => '/images/students/sneha.png'],
+        ['name' => 'Rajiv Shrestha', 'course' => 'BBS, Alumni', 'quote' => 'The holistic education I received at ACHS prepared me well for my professional career. The soft skills training was as valuable as the academic curriculum.', 'image' => '/images/students/rajiv.png'],
     ];
     @endphp
 
@@ -149,18 +150,5 @@
     </div>
 
 </div>
-
-
-    <!-- LOAD MORE BUTTON -->
-    <div style="text-align:center; margin-top:3rem;">
-        <a href="#" 
-           style="padding:12px 25px; background:#ffcc00; color:#004080; text-decoration:none; font-weight:700; border-radius:8px; transition:0.3s;"
-           onmouseover="this.style.background='#e6b800'"
-           onmouseout="this.style.background='#ffcc00'">
-            Load More Events
-        </a>
-    </div>
-
 </div>
-
 @endsection
